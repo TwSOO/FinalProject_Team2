@@ -1,5 +1,8 @@
 package com.cho2.finalproject.firebase;
 
+import android.widget.Toast;
+
+import com.cho2.finalproject.JoinAcitivity;
 import com.cho2.finalproject.bean.MemberBean;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.FirebaseDatabase;
@@ -13,7 +16,5 @@ public class InsertFirebase {
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URL);
     private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
-
-
 
 } // end InserFirebase

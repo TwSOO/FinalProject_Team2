@@ -1,5 +1,6 @@
 package com.cho2.finalproject;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.FileProvider;
@@ -19,10 +20,19 @@ import android.provider.MediaStore;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.cho2.finalproject.bean.MemberBean;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -32,11 +42,14 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class JoinAcitivity extends AppCompatActivity {
-
-
     private ImageView mImgID; //학생증 사진
     private EditText mEdtPhone; //전화번호
     private EditText mEdtName;  //학생 이름
+
+    public static final String STORAGE_DB_URL ="gs://swu2019-finalproject-team2.appspot.com"; // firebase database url
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URL);
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
 
     //사진이 저장되는 경로 - onActivityResult()로부터 받는 데이터
@@ -73,7 +86,50 @@ public class JoinAcitivity extends AppCompatActivity {
             }
         });
 
+        findViewById(R.id.btnSubmit).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                upload();
+            }
+        });
     }//end Oncreate
+
+    private void upload() {
+
+        if (mPhotoPath == null) {
+            Toast.makeText(this, "사진을 찍어주세요", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        StorageReference storageRef = mFirebaseStorage.getReference();
+        final StorageReference imageRef = storageRef.child("images/" + mCaptureUri.getLastPathSegment());
+
+        UploadTask uploadTask = imageRef.putFile(mCaptureUri);
+        uploadTask.continueWithTask(new Continuation<UploadTask.TaskSnapshot, Task<Uri>>() {
+            @Override
+            public Task<Uri> then(@NonNull Task<UploadTask.TaskSnapshot> task) throws Exception {
+                if (!task.isSuccessful()) {
+                    throw task.getException();
+                }
+                return imageRef.getDownloadUrl();
+            }
+        }).addOnCompleteListener(new OnCompleteListener<Uri>() {
+            @Override
+            public void onComplete(@NonNull Task<Uri> task) {
+                //데이터 베이스 업로드를 호출한다.
+                uploadMemberDB(mPhotoPath);
+            }
+        });
+    }
+    private void uploadMemberDB(String imgUri){
+
+        DatabaseReference dbRef=mFirebaseDatabase.getReference();
+
+        MemberBean memberBean=new MemberBean();
+        memberBean.ImgIDuri=imgUri;
+        memberBean.name=mEdtName.getText().toString();
+        memberBean.Phonenum=mEdtPhone.getText().toString();
+//        dbRef.child("members").child(memberBean.)
+    }
 
     private void takePicture() {
 
@@ -83,7 +139,7 @@ public class JoinAcitivity extends AppCompatActivity {
             mCaptureUri = Uri.fromFile( getOutPutMediaFile() );
         } else {
             mCaptureUri = FileProvider.getUriForFile(this,
-                    "com.example.guru2classexam", getOutPutMediaFile());
+                    "com.cho2.finalproject", getOutPutMediaFile());
         }
 
         i.putExtra(MediaStore.EXTRA_OUTPUT, mCaptureUri);
@@ -118,7 +174,7 @@ public class JoinAcitivity extends AppCompatActivity {
 
         bitmap.recycle();
 
-        //사진이 캡쳐되서 들어오면 뒤집어져 있다. 이애를 다시 원상복구 시킨다.
+        //사진이 캡쳐되서 들어오면 뒤집어져 있다. 이 애를 다시 원상복구 시킨다.
         ExifInterface exif = null;
         try {
             exif = new ExifInterface(mPhotoPath);
@@ -217,4 +273,5 @@ public class JoinAcitivity extends AppCompatActivity {
             }
         }
     }
+
 }
