@@ -32,4 +32,9 @@ dependencies {
     implementation 'com.google.firebase:firebase-auth:18.0.0'
     //Google 인증
     implementation 'com.google.android.gms:play-services-auth:17.0.0'
+
+    //FireBase Storage 사용 위해
+    implementation 'com.google.firebase:firebase-storage:18.0.0'
+    // FireBase Database 사용 위해
+    implementation 'com.google.firebase:firebase-database:18.0.0'
 }
