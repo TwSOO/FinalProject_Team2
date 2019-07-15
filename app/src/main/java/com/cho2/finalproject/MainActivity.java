@@ -2,6 +2,7 @@ package com.cho2.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
@@ -10,6 +11,7 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.MemberBean;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
@@ -21,6 +23,10 @@ import com.google.firebase.auth.AuthCredential;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
     // 구글 로그인 클라이언트 제어자
@@ -29,6 +35,8 @@ public class MainActivity extends AppCompatActivity {
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     // TAG
     private final String TAG = getClass().getSimpleName();
+    // Firebase 데이터베이스 참조 객체
+    FirebaseDatabase mFirebaseDatabse = FirebaseDatabase.getInstance();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -102,7 +110,7 @@ public class MainActivity extends AppCompatActivity {
     } // end firebaseAuthWithGoogle
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
+    protected void onActivityResult(final int requestCode, int resultCode, @Nullable Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
         //구글 로그인 버튼 응답
@@ -110,15 +118,40 @@ public class MainActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try{
                 // 구글 로그인 성공
-                GoogleSignInAccount account = task.getResult(ApiException.class);
+                final GoogleSignInAccount account = task.getResult(ApiException.class);
                 Toast.makeText(getBaseContext(), "구글 로그인에 성공 하였습니다.", Toast.LENGTH_LONG).show();
 
-                // Firebase 로그인 인증하러 가기
-                firebaseAuthWithGoogle(account);
+                //Firebase에 계정 존재 여부 체크
+                final String userEmail = account.getEmail();
+                mFirebaseDatabse.getReference().child("members").addValueEventListener(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+
+                        for(DataSnapshot snapshot : dataSnapshot.getChildren()){
+                            MemberBean memberBean = snapshot.getValue(MemberBean.class);
+                            if(TextUtils.equals(memberBean.userEmail, userEmail)){
+                                // Firebase 로그인 인증하러 가기
+                                firebaseAuthWithGoogle(account);
+                                break;
+                            }
+                        }
+
+                        Toast.makeText(MainActivity.this, "Firebase 계정 존재하지 않음", Toast.LENGTH_LONG).show();
+                        Intent intent = new Intent(MainActivity.this, JoinAcitivity.class);
+                        startActivityForResult(intent, 1005);
+
+                    } // onDataChange
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {}
+                });
+
+
             }catch(ApiException e){
                 e.printStackTrace();
             }// try...catch
-        } // if...else
+        }
+        // if...else
     } // end onActivityResult
 
 
