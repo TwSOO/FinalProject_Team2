@@ -38,6 +38,9 @@ public class MainActivity extends AppCompatActivity {
     // Firebase 데이터베이스 참조 객체
     FirebaseDatabase mFirebaseDatabse = FirebaseDatabase.getInstance();
 
+    // Login한 멤버
+    private MemberBean mLoginMember;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -98,7 +101,7 @@ public class MainActivity extends AppCompatActivity {
     } // end googleSignIn
 
     // Firebase 회원가입하면서 로그인까지 되는 것
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account, final MemberBean memberBean){
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account){
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -107,10 +110,14 @@ public class MainActivity extends AppCompatActivity {
                         if(task.isSuccessful()){
                             // Firebase 로그인 성공
                             Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
-                            Log.d(TAG, " >> Firebase 로그인 성공");
-                            if(memberBean.isAdmin){
+
+
+                            // 관리자 계정인지 검사하기
+                            if(mLoginMember.isAdmin){
+                                Log.d(TAG, " >> 관리자 로그인 성공");
                                 goTempAdminActivity();
                             }else{
+                                Log.d(TAG, " >> Firebase 로그인 성공");
                                 goTempActivity();
                             }
 
@@ -143,15 +150,21 @@ public class MainActivity extends AppCompatActivity {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
+                        boolean isFind = false;
+
                         for(DataSnapshot snapshot : dataSnapshot.getChildren()){
                             MemberBean memberBean = snapshot.getValue(MemberBean.class);
                             if(TextUtils.equals(memberBean.userEmail, userEmail)){
                                 // Firebase 로그인 인증하러 가기
-                                firebaseAuthWithGoogle(account, memberBean);
-
+                                Log.e(TAG, "Firebase에 계정 존재함");
+                                mLoginMember = memberBean;
+                                firebaseAuthWithGoogle(account);
+                                isFind = true;
                                 break;
                             }
                         }
+
+                        if(isFind) return;
 
                         Toast.makeText(MainActivity.this, "Firebase 계정 존재하지 않음", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, JoinAcitivity.class);
