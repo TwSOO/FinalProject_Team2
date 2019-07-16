@@ -140,6 +140,7 @@ public class MainActivity extends AppCompatActivity {
 
                         Toast.makeText(MainActivity.this, "Firebase 계정 존재하지 않음", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, JoinAcitivity.class);
+                        Log.e(TAG, "intent.putExtra(userEmail) userEmail: "+ userEmail);
                         intent.putExtra("useremail", userEmail);
                         intent.putExtra("tokenId", account.getIdToken());
                         startActivityForResult(intent, 1005);

@@ -26,6 +26,7 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.cho2.finalproject.bean.MemberBean;
+import com.cho2.finalproject.firebase.InsertFirebase;
 import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -142,7 +143,7 @@ public class JoinAcitivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Uri> task) {
 
                 //데이터 베이스 업로드를 호출한다.
-                uploadMemberDB(mPhotoPath, mUserEmail);
+                uploadMemberDB(mCaptureUri.getLastPathSegment(), mUserEmail);
             }
         });
     } // end upload()
@@ -155,9 +156,11 @@ public class JoinAcitivity extends AppCompatActivity {
         memberBean.ImgIDuri=imgUri;
         memberBean.name = mEdtName.getText().toString();
         memberBean.Phonenum = mEdtPhone.getText().toString();
-        dbRef.child("members").child(userEmail).setValue(memberBean);
-        Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
 
+        Log.e(TAG, "memberBean.userEmail" + memberBean.userEmail);
+        String userUUID = InsertFirebase.getUserIdFromUUID(memberBean.userEmail);
+        dbRef.child("members").child(userUUID).setValue(memberBean);
+        Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
         firebaseAuthWithGoogle(mTokenId);// 파이어베이스에 회원가입 및 로그인함
         setResult(RESULT_OK);
         finish();
