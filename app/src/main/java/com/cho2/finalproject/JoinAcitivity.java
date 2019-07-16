@@ -1,10 +1,5 @@
 package com.cho2.finalproject;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.FileProvider;
-
 import android.Manifest;
 import android.content.Intent;
 import android.content.res.Resources;
@@ -22,12 +17,15 @@ import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TimePicker;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.FileProvider;
 
 import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.firebase.InsertFirebase;
-import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -40,8 +38,6 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
-
-import org.w3c.dom.Text;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -103,6 +99,7 @@ public class JoinAcitivity extends AppCompatActivity {
             }
         });
 
+        // 재출버튼
         findViewById(R.id.btnSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -162,8 +159,7 @@ public class JoinAcitivity extends AppCompatActivity {
         dbRef.child("members").child(userUUID).setValue(memberBean);
         Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
         firebaseAuthWithGoogle(mTokenId);// 파이어베이스에 회원가입 및 로그인함
-        setResult(RESULT_OK);
-        finish();
+
 
     } // end uploadMemberDB
 
@@ -178,13 +174,16 @@ public class JoinAcitivity extends AppCompatActivity {
                             // Firebase 로그인 성공
                             Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             Log.d(TAG, " >> Firebase 로그인 성공");
-
+                            setResult(RESULT_OK);
+                            finish();
 
                         }
                         else{
                             // 로그인 실패
                             Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
                             Log.e(TAG, " >> 인증 실패"+task.getException());
+                            setResult(RESULT_CANCELED);
+                            finish();
                         }
                     }
                 });
