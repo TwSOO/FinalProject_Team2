@@ -156,6 +156,7 @@ public class JoinAcitivity extends AppCompatActivity {
         memberBean.isAdmin=false;
 
         Log.e(TAG, "memberBean.userEmail" + memberBean.userEmail);
+        
         String userUUID = InsertFirebase.getUserIdFromUUID(memberBean.userEmail);
         dbRef.child("members").child(userUUID).setValue(memberBean);
         Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
