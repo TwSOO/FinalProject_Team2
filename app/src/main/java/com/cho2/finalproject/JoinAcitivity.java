@@ -18,6 +18,7 @@ import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -25,10 +26,14 @@ import android.widget.TimePicker;
 import android.widget.Toast;
 
 import com.cho2.finalproject.bean.MemberBean;
+import com.google.android.gms.auth.api.signin.GoogleSignInAccount;
 import com.google.android.gms.tasks.Continuation;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthCredential;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.GoogleAuthProvider;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
@@ -45,6 +50,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 public class JoinAcitivity extends AppCompatActivity {
+    private final String TAG = getClass().getSimpleName();
     private ImageView mImgID; //학생증 사진
     private EditText mEdtPhone; //전화번호
     private EditText mEdtName;  //학생 이름
@@ -69,6 +75,7 @@ public class JoinAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+
         // userEmail 획득
         mUserEmail = getIntent().getStringExtra("useremail");
 
@@ -96,7 +103,8 @@ public class JoinAcitivity extends AppCompatActivity {
         findViewById(R.id.btnSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                upload();
+                upload(); // 스토리지와 데이터베이스에 업로드함
+                firebaseAuthWithGoogle(mUserEmail);// 파이어베이스에 회원가입 및 로그인함
             }
         });
     }//end Oncreate
@@ -137,7 +145,8 @@ public class JoinAcitivity extends AppCompatActivity {
                 uploadMemberDB(mPhotoPath, mUserEmail);
             }
         });
-    }
+    } // end upload()
+
     private void uploadMemberDB(String imgUri, String userEmail){
 
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
@@ -149,7 +158,30 @@ public class JoinAcitivity extends AppCompatActivity {
         dbRef.child("members").child(userEmail).setValue(memberBean);
         Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
 
-    }
+    } // end uploadMemberDB
+
+    // Firebase 회원가입하면서 로그인까지 되는 것
+    private void firebaseAuthWithGoogle(String idToken){
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            // Firebase 로그인 성공
+                            Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
+                            Log.d(TAG, " >> Firebase 로그인 성공");
+
+
+                        }
+                        else{
+                            // 로그인 실패
+                            Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
+                            Log.e(TAG, " >> 인증 실패"+task.getException());
+                        }
+                    }
+                });
+    } // end firebaseAuthWithGoogle
 
     private void takePicture() {
 
