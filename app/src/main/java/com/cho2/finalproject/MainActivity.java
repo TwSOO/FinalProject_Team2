@@ -99,8 +99,6 @@ public class MainActivity extends AppCompatActivity {
                             // Firebase 로그인 성공
                             Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             Log.d(TAG, " >> Firebase 로그인 성공");
-
-
                         }
                         else{
                             // 로그인 실패
