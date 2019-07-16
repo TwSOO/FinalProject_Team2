@@ -8,5 +8,7 @@ public class MemberBean {
     public String Phonenum;//핸드폰 번호
     public String name;//학생 이름
 
+    public boolean isAdmin;//관리자 계정 구분
+
 
 }
