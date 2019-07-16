@@ -66,7 +66,9 @@ public class MainActivity extends AppCompatActivity {
     } // end onResume
 
     private void goJoinActivity(){
-
+            Intent intent=new Intent(this,JoinAcitivity.class);
+            startActivity(intent);
+            finish();
     } // end goJoinActivity
     private View.OnClickListener mClicks = new View.OnClickListener() {
         @Override
@@ -161,7 +163,7 @@ public class MainActivity extends AppCompatActivity {
             }
         }
         // if...else
-    } // end onActivityResult
+    }// end onActivityResult
 
 
 } // end

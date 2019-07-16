@@ -2,7 +2,12 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.cho2.finalproject">
 
-    <uses-permission android:name="android.permission.CAMERA"/> 
+    <!-- 카메라 퍼미션 -->
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+
+
+    <uses-permission android:name="android.permission.CAMERA"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -11,7 +16,14 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-
+        <!-- 카메라 사용을 위한 Provider 선언 -->
+        <provider
+            android:name="androidx.core.content.FileProvider"
+            android:authorities="com.example.guru2classexam"
+            android:grantUriPermissions="true">
+            <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
+                android:resource="@xml/file_paths"/>
+        </provider>
 
         <activity android:name=".TempActivity" />
         <activity android:name=".JoinAcitivity" />

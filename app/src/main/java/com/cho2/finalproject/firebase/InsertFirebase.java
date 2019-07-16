@@ -1,6 +1,9 @@
 package com.cho2.finalproject.firebase;
 
+import android.content.Intent;
 import android.widget.Toast;
+
+import androidx.annotation.Nullable;
 
 import com.cho2.finalproject.JoinAcitivity;
 import com.cho2.finalproject.bean.MemberBean;
