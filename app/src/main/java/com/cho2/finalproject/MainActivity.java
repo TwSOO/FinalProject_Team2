@@ -139,6 +139,7 @@ public class MainActivity extends AppCompatActivity {
                         Toast.makeText(MainActivity.this, "Firebase 계정 존재하지 않음", Toast.LENGTH_LONG).show();
                         Intent intent = new Intent(MainActivity.this, JoinAcitivity.class);
                         intent.putExtra("useremail", userEmail);
+                        intent.putExtra("tokenId", account.getIdToken());
                         startActivityForResult(intent, 1005);
 
                     } // onDataChange
@@ -151,6 +152,13 @@ public class MainActivity extends AppCompatActivity {
             }catch(ApiException e){
                 e.printStackTrace();
             }// try...catch
+        }
+        else if(requestCode == 1005) {
+            if(requestCode == RESULT_OK) {
+                //TOTO 메인화면으로 이동
+                //goMainActivity();
+                finish();
+            }
         }
         // if...else
     } // end onActivityResult

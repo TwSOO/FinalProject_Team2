@@ -55,6 +55,7 @@ public class JoinAcitivity extends AppCompatActivity {
     private EditText mEdtPhone; //전화번호
     private EditText mEdtName;  //학생 이름
     private String mUserEmail;
+    private String mTokenId;
 
     public static final String STORAGE_DB_URL ="gs://swu2019-finalproject-team2.appspot.com"; // firebase database url
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -78,6 +79,7 @@ public class JoinAcitivity extends AppCompatActivity {
 
         // userEmail 획득
         mUserEmail = getIntent().getStringExtra("useremail");
+        mTokenId = getIntent().getStringExtra("tokenId");
 
         //카메라를 사용하기 위한 퍼미션을 요청한다.
 
@@ -104,7 +106,6 @@ public class JoinAcitivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 upload(); // 스토리지와 데이터베이스에 업로드함
-                firebaseAuthWithGoogle(mUserEmail);// 파이어베이스에 회원가입 및 로그인함
             }
         });
     }//end Oncreate
@@ -140,7 +141,6 @@ public class JoinAcitivity extends AppCompatActivity {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
 
-
                 //데이터 베이스 업로드를 호출한다.
                 uploadMemberDB(mPhotoPath, mUserEmail);
             }
@@ -157,6 +157,10 @@ public class JoinAcitivity extends AppCompatActivity {
         memberBean.Phonenum = mEdtPhone.getText().toString();
         dbRef.child("members").child(userEmail).setValue(memberBean);
         Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
+
+        firebaseAuthWithGoogle(mTokenId);// 파이어베이스에 회원가입 및 로그인함
+        setResult(RESULT_OK);
+        finish();
 
     } // end uploadMemberDB
 
