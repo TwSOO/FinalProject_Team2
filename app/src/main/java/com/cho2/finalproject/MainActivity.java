@@ -58,11 +58,11 @@ public class MainActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
 
-        if(mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null){
-            // 이미 로그인 되어있다 따라서 메인화면으로 바로 이동한다.
-            Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
-            goJoinActivity();
-        }
+//        if(mFirebaseAuth.getCurrentUser() != null && mFirebaseAuth.getCurrentUser().getEmail() != null){
+//            // 이미 로그인 되어있다 따라서 메인화면으로 바로 이동한다.
+//            Toast.makeText(this, "로그인 성공 - 메인화면 이동", Toast.LENGTH_LONG).show();
+//            goTempActivity();
+//        }
     } // end onResume
 
     private void goJoinActivity(){
@@ -70,6 +70,8 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
             finish();
     } // end goJoinActivity
+
+
     private View.OnClickListener mClicks = new View.OnClickListener() {
         @Override
         public void onClick(View view) {
@@ -123,7 +125,7 @@ public class MainActivity extends AppCompatActivity {
 
                 //Firebase에 계정 존재 여부 체크
                 final String userEmail = account.getEmail();
-                mFirebaseDatabse.getReference().child("members").addValueEventListener(new ValueEventListener() {
+                mFirebaseDatabse.getReference().child("members").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
@@ -132,6 +134,8 @@ public class MainActivity extends AppCompatActivity {
                             if(TextUtils.equals(memberBean.userEmail, userEmail)){
                                 // Firebase 로그인 인증하러 가기
                                 firebaseAuthWithGoogle(account);
+                                goTempActivity();
+                                finish();
                                 break;
                             }
                         }
@@ -155,7 +159,7 @@ public class MainActivity extends AppCompatActivity {
             }// try...catch
         }
         else if(requestCode == 1005) {
-            if(requestCode == RESULT_OK) {
+            if(resultCode == RESULT_OK) {
                 //TOTO 메인화면으로 이동
                 goTempActivity();
                 finish();
@@ -164,7 +168,7 @@ public class MainActivity extends AppCompatActivity {
 
     }// end onActivityResult
    private void goTempActivity(){
-        Intent i=new Intent(this,TempActivity.class );
+        Intent i=new Intent(MainActivity.this,TempActivity.class );
         startActivity(i);
    }
 
