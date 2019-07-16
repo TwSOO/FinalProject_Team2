@@ -17,6 +17,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.provider.MediaStore;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageView;
@@ -34,6 +35,8 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
+import org.w3c.dom.Text;
+
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -45,6 +48,7 @@ public class JoinAcitivity extends AppCompatActivity {
     private ImageView mImgID; //학생증 사진
     private EditText mEdtPhone; //전화번호
     private EditText mEdtName;  //학생 이름
+    private String mUserEmail;
 
     public static final String STORAGE_DB_URL ="gs://swu2019-finalproject-team2.appspot.com"; // firebase database url
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
@@ -65,6 +69,9 @@ public class JoinAcitivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_join);
+        // userEmail 획득
+        mUserEmail = getIntent().getStringExtra("useremail");
+
         //카메라를 사용하기 위한 퍼미션을 요청한다.
 
         ActivityCompat.requestPermissions(this, new String[]{
@@ -100,6 +107,15 @@ public class JoinAcitivity extends AppCompatActivity {
             Toast.makeText(this, "사진을 찍어주세요", Toast.LENGTH_SHORT).show();
             return;
         }
+        if(TextUtils.isEmpty(mEdtName.getText())){
+            Toast.makeText(this, "이름을 입력해주세요", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if(TextUtils.isEmpty(mEdtPhone.getText())){
+            Toast.makeText(this, " 전화번호를 입력해주세요", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
         StorageReference storageRef = mFirebaseStorage.getReference();
         final StorageReference imageRef = storageRef.child("images/" + mCaptureUri.getLastPathSegment());
 
@@ -115,20 +131,24 @@ public class JoinAcitivity extends AppCompatActivity {
         }).addOnCompleteListener(new OnCompleteListener<Uri>() {
             @Override
             public void onComplete(@NonNull Task<Uri> task) {
+
+
                 //데이터 베이스 업로드를 호출한다.
-                uploadMemberDB(mPhotoPath);
+                uploadMemberDB(mPhotoPath, mUserEmail);
             }
         });
     }
-    private void uploadMemberDB(String imgUri){
+    private void uploadMemberDB(String imgUri, String userEmail){
 
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
-
-        MemberBean memberBean=new MemberBean();
+        MemberBean memberBean = new MemberBean();
+        memberBean.userEmail = userEmail;
         memberBean.ImgIDuri=imgUri;
-        memberBean.name=mEdtName.getText().toString();
-        memberBean.Phonenum=mEdtPhone.getText().toString();
-//        dbRef.child("members").child(memberBean.)
+        memberBean.name = mEdtName.getText().toString();
+        memberBean.Phonenum = mEdtPhone.getText().toString();
+        dbRef.child("members").child(userEmail).setValue(memberBean);
+        Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
+
     }
 
     private void takePicture() {
