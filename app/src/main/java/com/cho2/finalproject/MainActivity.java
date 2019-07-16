@@ -71,6 +71,13 @@ public class MainActivity extends AppCompatActivity {
             finish();
     } // end goJoinActivity
 
+    private void goTempAdminActivity(){
+        Intent intent =new Intent(this,TempAdminActivity.class);
+        startActivity(intent);
+        finish();
+    }
+
+
 
     private View.OnClickListener mClicks = new View.OnClickListener() {
         @Override
