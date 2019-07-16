@@ -98,7 +98,7 @@ public class MainActivity extends AppCompatActivity {
     } // end googleSignIn
 
     // Firebase 회원가입하면서 로그인까지 되는 것
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account){
+    private void firebaseAuthWithGoogle(GoogleSignInAccount account, final MemberBean memberBean){
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -108,6 +108,13 @@ public class MainActivity extends AppCompatActivity {
                             // Firebase 로그인 성공
                             Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
                             Log.d(TAG, " >> Firebase 로그인 성공");
+                            if(memberBean.isAdmin){
+                                goTempAdminActivity();
+                            }else{
+                                goTempActivity();
+                            }
+
+                            finish();
                         }
                         else{
                             // 로그인 실패
@@ -140,9 +147,8 @@ public class MainActivity extends AppCompatActivity {
                             MemberBean memberBean = snapshot.getValue(MemberBean.class);
                             if(TextUtils.equals(memberBean.userEmail, userEmail)){
                                 // Firebase 로그인 인증하러 가기
-                                firebaseAuthWithGoogle(account);
-                                goTempActivity();
-                                finish();
+                                firebaseAuthWithGoogle(account, memberBean);
+
                                 break;
                             }
                         }
