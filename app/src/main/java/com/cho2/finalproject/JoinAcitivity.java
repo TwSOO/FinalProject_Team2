@@ -153,7 +153,7 @@ public class JoinAcitivity extends AppCompatActivity {
         memberBean.ImgIDuri=imgUri;
         memberBean.name = mEdtName.getText().toString();
         memberBean.Phonenum = mEdtPhone.getText().toString();
-
+        
         Log.e(TAG, "memberBean.userEmail" + memberBean.userEmail);
         String userUUID = InsertFirebase.getUserIdFromUUID(memberBean.userEmail);
         dbRef.child("members").child(userUUID).setValue(memberBean);
