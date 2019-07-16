@@ -158,12 +158,16 @@ public class MainActivity extends AppCompatActivity {
         else if(requestCode == 1005) {
             if(requestCode == RESULT_OK) {
                 //TOTO 메인화면으로 이동
-                //goMainActivity();
+                goTempActivity();
                 finish();
             }
-        }
-        // if...else
+        }// if...else
+
     }// end onActivityResult
+   private void goTempActivity(){
+        Intent i=new Intent(this,TempActivity.class );
+        startActivity(i);
+   }
 
 
 } // end

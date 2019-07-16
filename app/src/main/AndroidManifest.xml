@@ -19,7 +19,7 @@
         <!-- 카메라 사용을 위한 Provider 선언 -->
         <provider
             android:name="androidx.core.content.FileProvider"
-            android:authorities="com.example.guru2classexam"
+            android:authorities="com.cho2.finalproject"
             android:grantUriPermissions="true">
             <meta-data android:name="android.support.FILE_PROVIDER_PATHS"
                 android:resource="@xml/file_paths"/>
