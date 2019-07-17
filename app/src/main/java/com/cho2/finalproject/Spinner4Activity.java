@@ -23,7 +23,7 @@ public class Spinner4Activity extends AppCompatActivity { //2과 스피너
         setContentView(R.layout.activity_spinner4);
 
         arrayList = new ArrayList<>();
-
+        arrayList.add("강의실을 선택하세요");
         arrayList.add("301");
         arrayList.add("302");
         arrayList.add("303");

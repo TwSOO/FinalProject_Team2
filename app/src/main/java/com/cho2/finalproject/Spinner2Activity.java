@@ -24,6 +24,7 @@ public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 -
         setContentView(R.layout.activity_spinner2);
 
         arrayList = new ArrayList<>();
+        arrayList.add("강의실을 선택하세요");
         arrayList.add("402");
         arrayList.add("403");
         arrayList.add("404");

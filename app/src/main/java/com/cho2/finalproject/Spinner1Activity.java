@@ -25,6 +25,7 @@ public class Spinner1Activity extends AppCompatActivity { //인사대 스피너
         setContentView(R.layout.activity_spinner1);
 
         arrayList = new ArrayList<>();
+        arrayList.add("강의실을 선택하세요");
         arrayList.add("102");
         arrayList.add("103");
         arrayList.add("104");

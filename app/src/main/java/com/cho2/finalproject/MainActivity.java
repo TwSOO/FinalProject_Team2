@@ -14,10 +14,13 @@ import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
 import com.cho2.finalproject.Science1Activity;
 import com.cho2.finalproject.Science2Activity;
+import com.cho2.finalproject.bean.ReservationBean;
 
 import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
+
+    private ReservationBean reservationBean = new ReservationBean();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), FifAnnivActivity.class);
+                reservationBean.building = 1;
+                intent.putExtra(ReservationBean.class.getName(), reservationBean);
                 startActivity(intent);
             }
         });
@@ -38,6 +43,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HumanSocietyActivity.class);
+                reservationBean.building = 2;
+                intent.putExtra(ReservationBean.class.getName(), reservationBean);
                 startActivity(intent);
             }
         });
@@ -47,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Science1Activity.class);
+                reservationBean.building = 3;
+                intent.putExtra(ReservationBean.class.getName(), reservationBean);
                 startActivity(intent);
             }
         });
@@ -56,6 +65,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Science2Activity.class);
+                reservationBean.building = 4;
+                intent.putExtra(ReservationBean.class.getName(), reservationBean);
                 startActivity(intent);
             }
         });

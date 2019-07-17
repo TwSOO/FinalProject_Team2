@@ -10,16 +10,21 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.ReservationBean;
+
 public class FifAnnivActivity extends AppCompatActivity {
 
     CalendarView calendar;
     TextView tvDate;
     Button btnNext;
+    private ReservationBean reservationBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fif_anniv);
+
+        reservationBean = (ReservationBean)getIntent().getSerializableExtra(ReservationBean.class.getName());
 
         calendar = (CalendarView) findViewById(R.id.calendar);
         tvDate = (TextView) findViewById(R.id.tvDate);

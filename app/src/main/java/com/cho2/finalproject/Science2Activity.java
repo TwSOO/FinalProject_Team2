@@ -10,11 +10,14 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.ReservationBean;
+
 public class Science2Activity extends AppCompatActivity {
 
     CalendarView calendar;
     TextView tvDate;
     Button btnNext;
+    private ReservationBean reservationBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -27,6 +27,7 @@ public class Spinner3Activity extends AppCompatActivity { // 제1과 스피너
 
 
         arrayList = new ArrayList<>();
+        arrayList.add("강의실을 선택하세요");
         arrayList.add("B101");
         arrayList.add("B102");
         arrayList.add("B105");
