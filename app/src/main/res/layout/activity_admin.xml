@@ -1,0 +1,167 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".MyPageActivity">
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="20dp"
+        android:layout_marginEnd="20dp"
+        android:layout_marginBottom="1dp"
+        android:layout_marginTop="20dp"
+        android:text="관리자 페이지"
+        android:textSize="55dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.048"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.038" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="[예약내역확인]"
+        android:layout_marginTop="30dp"
+        android:textSize="20dp"/>
+
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:stretchColumns="*">
+
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingTop="20dp"
+            android:paddingBottom="10dp"
+            android:text="예약자 날짜순으로 보기"
+            android:textSize="20dp" />
+
+        <Spinner
+            android:id="@+id/spinner1"
+            android:layout_width="match_parent"
+            android:layout_height="38dp"
+            android:autofillHints="7월"></Spinner>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/txtDate"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="일자"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약시간"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약상태"
+                android:textSize="20dp" />
+
+            <TextView
+                android:id="@+id/txtDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="상세보기"
+                android:textSize="20dp" />
+
+        </TableRow>
+
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="20dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="20dp"/>
+
+            <Button
+                android:id="@+id/btnDetail"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="상세보기" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:textSize="20dp"/>
+
+        </TableRow>
+
+
+
+
+
+    </TableLayout>
+
+
+</LinearLayout>

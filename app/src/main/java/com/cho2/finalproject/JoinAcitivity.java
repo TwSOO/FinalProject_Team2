@@ -99,7 +99,7 @@ public class JoinAcitivity extends AppCompatActivity {
             }
         });
 
-        // 재출버튼
+        // 제출버튼
         findViewById(R.id.btnSubmit).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {

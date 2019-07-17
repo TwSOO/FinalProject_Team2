@@ -13,7 +13,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".TempAdminActivity"></activity>
+
         <!-- 카메라 사용을 위한 Provider 선언 -->
         <provider
             android:name="androidx.core.content.FileProvider"
@@ -24,9 +24,22 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <activity android:name=".TempAdminActivity"></activity>
+        <activity android:name=".AdminActivity" />
+        <activity android:name=".FifAnnivActivity" />
+        <activity android:name=".HumanSocietyActivity" />
+        <activity android:name=".MyPageActivity" />
+        <activity android:name=".ReservationActivity" />
+        <activity android:name=".Spinner1Activity" />
+        <activity android:name=".Spinner2Activity" />
+        <activity android:name=".Spinner3Activity" />
+        <activity android:name=".Spinner4Activity" />
+        <activity android:name=".Science1Activity" />
+        <activity android:name=".Science2Activity" />
         <activity android:name=".TempActivity" />
         <activity android:name=".JoinAcitivity" />
-        <activity android:name=".MainActivity">
+        <activity android:name=".MainActivity" />
+        <activity android:name=".LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

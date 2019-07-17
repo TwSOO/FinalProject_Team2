@@ -1,0 +1,395 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+
+
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:gravity="center"
+        android:text="예약화면"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        android:layout_weight="0.05"
+        android:layout_marginBottom="30dp"
+        />
+
+
+
+    <TableLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="0.5"
+        android:stretchColumns="*">
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/border">
+
+            <TextView
+                android:id="@+id/txtCondition"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="시간대"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약상태"
+                android:textSize="30dp" />
+
+            <TextView
+                android:id="@+id/txtBooking"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약하기"
+                android:textSize="30dp"/>
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="10:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약가능"
+                android:textColor="#00ff00"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="11:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약가능"
+                android:textColor="#00ff00"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes11"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="12:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약가능"
+                android:textColor="#00ff00"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes12"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="13:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약불가"
+                android:textColor="#ff0000"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes13"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="14:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약가능"
+                android:textColor="#00ff00"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes14"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="15:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약가능"
+                android:textColor="#00ff00"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes15"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="16:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약불가"
+                android:textColor="#ff0000"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes16"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="17:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약가능"
+                android:textColor="#00ff00"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes17"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+
+
+        </TableRow>
+
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@drawable/border">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="18:00"
+                android:textSize="25dp" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="1dp"
+                android:layout_marginBottom="1dp"
+                android:gravity="center"
+                android:padding="3dp"
+                android:text="예약가능"
+                android:textColor="#00ff00"
+                android:textSize="25dp" />
+
+            <Button
+                android:id="@+id/btnRes18"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="예약하기" />
+        </TableRow>
+
+
+    </TableLayout>
+
+</LinearLayout>
