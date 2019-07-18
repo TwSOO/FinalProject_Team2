@@ -7,15 +7,34 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.ImageView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.bean.ReservationBean;
+import com.cho2.finalproject.firebase.InsertFirebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
 
 public class ReservationActivity extends AppCompatActivity {
 
     Button btnRes10, btnRes11, btnRes12, btnRes13, btnRes14, btnRes15, btnRes16, btnRes17, btnRes18;
+    public static final String STORAGE_DB_URL ="gs://swu2019-finalproject-team2.appspot.com"; // firebase database url
+    private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+
+    private String mReserveTime;
+    private String mReserveMonth; // 예약 월
+    private String mReserveDay; // 예약 일
+    private int mReserveBuilding; //건물
+    private String mReserbeRoom;     //호실
+    private MemberBean mReserveMember; // 예약한 사람
     private ReservationBean reservationBean;
 
 
@@ -240,6 +259,11 @@ public class ReservationActivity extends AppCompatActivity {
 
 
     private void reservaion(ReservationBean reservationBean){
+
+        DatabaseReference dbRef=mFirebaseDatabase.getReference();
+
+        dbRef.child("members").child(uerUUID).setValue(reservationBean);
+        Toast.makeText(this,"예약 완료",Toast.LENGTH_LONG).show();
 
     }
 

@@ -12,8 +12,8 @@ public class ReservationBean implements Serializable {
     public String mReserveDay; // 예약 일
     public String mReserveTime; // 예약 시간
     public int mReserveBuilding; //건물
-    public String mReserbeRoom;     //호실
-    public MemberBean mReserveMember; // 예약한 사람
+    public String mReserveRoom;     //호실
+    public String mEmail;//예약한 사람 이메일
 
 
     @Override
@@ -23,8 +23,8 @@ public class ReservationBean implements Serializable {
                 ", mReserveDay='" + mReserveDay + '\'' +
                 ", mReserveTime='" + mReserveTime + '\'' +
                 ", mReserveBuilding=" + mReserveBuilding +
-                ", mReserbeRoom='" + mReserbeRoom + '\'' +
-                ", mReserveMember=" + mReserveMember +
+                ", mReserveRoom='" + mReserveRoom + '\'' +
+                ", mReserveMember=" + mEmail +
                 '}';
     }
 
