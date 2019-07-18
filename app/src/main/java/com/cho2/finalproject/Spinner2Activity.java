@@ -68,6 +68,7 @@ public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 -
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
+                reservationBean.mReserveRoom = arrayList.get(i);
 
             }
             @Override
@@ -80,6 +81,7 @@ public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 -
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                intent.putExtra("reservation", reservationBean);
                 startActivity(intent);
             }
         });

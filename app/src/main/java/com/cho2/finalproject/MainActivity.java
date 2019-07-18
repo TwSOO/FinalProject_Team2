@@ -3,6 +3,7 @@ package com.cho2.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 
@@ -20,7 +21,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
          reservationBean = new ReservationBean();
-         
+         reservationBean.mEmail = getIntent().getStringExtra("loginMemberEmail");
+         Log.e("MainActivity", "reservationBean.mEmail 값: "+reservationBean.mEmail);
+
+
 
         Button btn1 = findViewById(R.id.btn1);
         btn1.setOnClickListener(new View.OnClickListener() {

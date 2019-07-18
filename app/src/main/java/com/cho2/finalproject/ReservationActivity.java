@@ -56,8 +56,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "10:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
-
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -80,7 +82,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "11:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -104,7 +109,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "12:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -128,7 +136,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "13:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -151,7 +162,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "14:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -173,7 +187,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "15:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -196,7 +213,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "16:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -219,7 +239,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "17:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -242,7 +265,10 @@ public class ReservationActivity extends AppCompatActivity {
                 alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                     @Override
                     public void onClick(DialogInterface dialogInterface, int i) {
+                        reservationBean.mReserveTime = "18:00";
+                        reservation(reservationBean);
                         Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
+                        intent.putExtra("reservation", reservationBean);
                         startActivity(intent);
                     }
                 });
@@ -258,7 +284,7 @@ public class ReservationActivity extends AppCompatActivity {
     }
 
 
-    private void reservaion(ReservationBean reservationBean){
+    private void reservation(ReservationBean reservationBean){
 
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
         dbRef.child("reservations").child("mReserveBuilding").child("mReserveRoom").child("mReserveMonth").child("mReserveDay").child("mReserveTime").child("mEmail").setValue(reservationBean);

@@ -42,6 +42,9 @@ public class LoginActivity extends AppCompatActivity {
     // Login한 멤버
     private MemberBean mLoginMember;
 
+    // email 얻기 위한 account
+    private GoogleSignInAccount account;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -75,8 +78,9 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     } // end goJoinActivity
 
-    private void goAdminActivity(){
+    private void goAdminActivity(String email){
         Intent intent =new Intent(this,AdminActivity.class);
+        intent.putExtra("loginMemberEmail",email);
         startActivity(intent);
         finish();
     }
@@ -102,7 +106,7 @@ public class LoginActivity extends AppCompatActivity {
     } // end googleSignIn
 
     // Firebase 회원가입하면서 로그인까지 되는 것
-    private void firebaseAuthWithGoogle(GoogleSignInAccount account){
+    private void firebaseAuthWithGoogle(final GoogleSignInAccount account){
         AuthCredential credential = GoogleAuthProvider.getCredential(account.getIdToken(), null);
         mFirebaseAuth.signInWithCredential(credential)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
@@ -116,10 +120,10 @@ public class LoginActivity extends AppCompatActivity {
                             // 관리자 계정인지 검사하기
                             if(mLoginMember.isAdmin){
                                 Log.d(TAG, " >> 관리자 로그인 성공");
-                                goAdminActivity();
+                                goAdminActivity(account.getEmail());
                             }else{
                                 Log.d(TAG, " >> Firebase 로그인 성공");
-                                goMainActivity();
+                                goMainActivity(account.getEmail());
                             }
 
                             finish();
@@ -142,7 +146,7 @@ public class LoginActivity extends AppCompatActivity {
             Task<GoogleSignInAccount> task = GoogleSignIn.getSignedInAccountFromIntent(data);
             try{
                 // 구글 로그인 성공
-                final GoogleSignInAccount account = task.getResult(ApiException.class);
+                account = task.getResult(ApiException.class);
                 Toast.makeText(getBaseContext(), "구글 로그인에 성공 하였습니다.", Toast.LENGTH_LONG).show();
 
                 //Firebase에 계정 존재 여부 체크
@@ -188,14 +192,15 @@ public class LoginActivity extends AppCompatActivity {
         else if(requestCode == 1005) {
             if(resultCode == RESULT_OK) {
                 //TOTO 메인화면으로 이동
-                goMainActivity();
+                goMainActivity(account.getEmail());
                 finish();
             }
         }// if...else
 
     }// end onActivityResult
-    private void goMainActivity(){
+    private void goMainActivity(String email){
         Intent i=new Intent(LoginActivity.this, MainActivity.class );
+        getIntent().putExtra("loginMemberEmail", email);
         startActivity(i);
     }
 
