@@ -287,7 +287,8 @@ public class ReservationActivity extends AppCompatActivity {
     private void reservation(ReservationBean reservationBean){
 
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
-        dbRef.child("reservations").child(reservationBean.mReserveBuilding).child(reservationBean.mReserveRoom+"호").child(reservationBean.mReserveMonth+"월").child(reservationBean.mReserveDay+"일").child(reservationBean.mReserveTime).setValue(reservationBean.mEmail);
+
+        dbRef.child("reservations").child(reservationBean.mReserveBuilding).child(reservationBean.mReserveRoom+"호").child(reservationBean.makeDate()).child(reservationBean.mReserveTime).setValue(reservationBean.mEmail);
         Toast.makeText(this,"예약 완료",Toast.LENGTH_LONG).show();
 
     }
