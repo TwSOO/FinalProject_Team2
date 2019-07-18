@@ -21,7 +21,7 @@ public class InsertFirebase {
     public static final String STORAGE_DB_URL ="gs://swu2019-finalproject-team2.appspot.com"; // firebase database url
     private FirebaseAuth mFirebaseAuth = FirebaseAuth.getInstance();
     private FirebaseStorage mFirebaseStorage = FirebaseStorage.getInstance(STORAGE_DB_URL);
-    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+    public static final FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
 
     public static String getUserIdFromUUID(String userEmail){
         long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits(); // 사용자 이메일을 고유 숫자값으로 바꿈
@@ -29,7 +29,7 @@ public class InsertFirebase {
     }
 
     // 예약 취소 함수
-    public void cancelReservation(ReservationBean reservationBean){
+    public static void cancelReservation(ReservationBean reservationBean){
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
         dbRef.child("reservations").child(reservationBean.mReserveBuilding).child(reservationBean.mReserveRoom+"호").child(reservationBean.makeDate()).child(reservationBean.mReserveTime).removeValue();
     }
