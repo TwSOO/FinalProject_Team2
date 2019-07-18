@@ -47,7 +47,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Science1Activity.class);
                 reservationBean.mReserveBuilding = 3;
-                intent.putExtra(ReservationBean.class.getName(), reservationBean);
+                intent.putExtra("reservation", reservationBean);
                 startActivity(intent);
             }
         });
@@ -58,7 +58,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Science2Activity.class);
                 reservationBean.mReserveBuilding = 4;
-                intent.putExtra(ReservationBean.class.getName(), reservationBean);
+                intent.putExtra("reservation", reservationBean);
                 startActivity(intent);
             }
         });

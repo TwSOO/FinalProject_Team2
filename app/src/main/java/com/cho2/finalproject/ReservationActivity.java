@@ -9,9 +9,13 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.ReservationBean;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class ReservationActivity extends AppCompatActivity {
 
     Button btnRes10, btnRes11, btnRes12, btnRes13, btnRes14, btnRes15, btnRes16, btnRes17, btnRes18;
+    private FirebaseDatabase firebaseAuth
 
 
     @Override
@@ -229,7 +233,12 @@ public class ReservationActivity extends AppCompatActivity {
 
     }
 
-}
+
+    private void reservaion(ReservationBean reservationBean){
+
+    }
+
+} // end class
 
 
 

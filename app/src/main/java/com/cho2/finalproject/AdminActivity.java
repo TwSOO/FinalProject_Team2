@@ -30,7 +30,8 @@ public class AdminActivity extends AppCompatActivity {
         findViewById(R.id.btnReserve).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent()
+                Intent intent = new Intent(AdminActivity.this, MainActivity.class);
+                startActivity(intent);
             }
         });
 
