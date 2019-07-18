@@ -55,8 +55,6 @@ public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 -
         arrayList.add("522");
 
 
-
-
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
@@ -66,9 +64,8 @@ public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 -
         spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.",
-                        Toast.LENGTH_SHORT).show();
-                reservationBean.mReserveRoom = arrayList.get(i);
+                Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.", Toast.LENGTH_SHORT).show();
+                reservationBean.step3RoomName = arrayList.get(i);
 
             }
             @Override
