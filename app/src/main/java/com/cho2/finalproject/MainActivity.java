@@ -8,15 +8,7 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cho2.finalproject.FifAnnivActivity;
-import com.cho2.finalproject.HumanSocietyActivity;
-import com.cho2.finalproject.MyPageActivity;
-import com.cho2.finalproject.R;
-import com.cho2.finalproject.Science1Activity;
-import com.cho2.finalproject.Science2Activity;
 import com.cho2.finalproject.bean.ReservationBean;
-
-import java.util.Date;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -32,8 +24,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), FifAnnivActivity.class);
-                reservationBean.building = 1;
-                intent.putExtra(ReservationBean.class.getName(), reservationBean);
+                reservationBean.mReserveBuilding = 1;
+                intent.putExtra("reservation", reservationBean);
                 startActivity(intent);
             }
         });
@@ -43,8 +35,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), HumanSocietyActivity.class);
-                reservationBean.building = 2;
-                intent.putExtra(ReservationBean.class.getName(), reservationBean);
+                reservationBean.mReserveBuilding = 2;
+                intent.putExtra("reservation", reservationBean);
                 startActivity(intent);
             }
         });
@@ -54,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Science1Activity.class);
-                reservationBean.building = 3;
+                reservationBean.mReserveBuilding = 3;
                 intent.putExtra(ReservationBean.class.getName(), reservationBean);
                 startActivity(intent);
             }
@@ -65,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), Science2Activity.class);
-                reservationBean.building = 4;
+                reservationBean.mReserveBuilding = 4;
                 intent.putExtra(ReservationBean.class.getName(), reservationBean);
                 startActivity(intent);
             }
