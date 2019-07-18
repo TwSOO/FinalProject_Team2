@@ -3,6 +3,7 @@ package com.cho2.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -12,6 +13,8 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.ReservationBean;
+
 import java.util.ArrayList;
 
 public class Spinner1Activity extends AppCompatActivity { //인사대 스피너
@@ -19,10 +22,15 @@ public class Spinner1Activity extends AppCompatActivity { //인사대 스피너
     private Spinner spinner1;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
+
+    private ReservationBean reservationBean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spinner1);
+        reservationBean = (ReservationBean)getIntent().getSerializableExtra("reservation");
+        Log.e("reservationBean", "reservationBean 내용"+reservationBean.toString());
 
         arrayList = new ArrayList<>();
         arrayList.add("강의실을 선택하세요");
@@ -61,6 +69,7 @@ public class Spinner1Activity extends AppCompatActivity { //인사대 스피너
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
+                reservationBean.mReserveRoom = arrayList.get(i);
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -73,6 +82,7 @@ public class Spinner1Activity extends AppCompatActivity { //인사대 스피너
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                intent.putExtra("reservation", reservationBean);
                 startActivity(intent);
             }
         });
