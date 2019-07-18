@@ -20,7 +20,7 @@ public class MyPageActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
 
-        findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyPageActivity.this);
@@ -42,7 +42,6 @@ public class MyPageActivity extends AppCompatActivity {
             }
         });
 
-
         // 관리자페이지가 잘 되는지 보기위한 버튼일 뿐임.
         Button button;
         findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
@@ -52,8 +51,8 @@ public class MyPageActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+        */
     }
-
 
 
 } // end class

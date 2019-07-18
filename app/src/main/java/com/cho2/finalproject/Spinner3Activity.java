@@ -58,7 +58,7 @@ public class Spinner3Activity extends AppCompatActivity { // 제1과 스피너
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(), arrayList.get(i) + "가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-                reservationBean.mReserveRoom = arrayList.get(i);
+                reservationBean.step3RoomName= arrayList.get(i);
             }
 
             @Override
