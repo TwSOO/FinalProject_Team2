@@ -2,6 +2,7 @@ package com.cho2.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,16 +12,23 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.ReservationBean;
+
 import java.util.ArrayList;
 
 public class Spinner4Activity extends AppCompatActivity { //2과 스피너
     private Spinner spinner1;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
+    private ReservationBean reservationBean;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spinner4);
+
+        reservationBean = (ReservationBean)getIntent().getSerializableExtra("reservation");
+        Log.e("reservationBean", "reservationBean 내용"+reservationBean.toString());
 
         arrayList = new ArrayList<>();
         arrayList.add("강의실을 선택하세요");
