@@ -1,6 +1,5 @@
 package com.cho2.finalproject;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -76,8 +75,8 @@ public class LoginActivity extends AppCompatActivity {
         finish();
     } // end goJoinActivity
 
-    private void goTempAdminActivity(){
-        Intent intent =new Intent(this,JoinAcitivity.class);
+    private void goAdminActivity(){
+        Intent intent =new Intent(this,AdminActivity.class);
         startActivity(intent);
         finish();
     }
@@ -117,10 +116,10 @@ public class LoginActivity extends AppCompatActivity {
                             // 관리자 계정인지 검사하기
                             if(mLoginMember.isAdmin){
                                 Log.d(TAG, " >> 관리자 로그인 성공");
-                                goTempAdminActivity();
+                                goAdminActivity();
                             }else{
                                 Log.d(TAG, " >> Firebase 로그인 성공");
-                                goTempActivity();
+                                goMainActivity();
                             }
 
                             finish();
@@ -189,14 +188,14 @@ public class LoginActivity extends AppCompatActivity {
         else if(requestCode == 1005) {
             if(resultCode == RESULT_OK) {
                 //TOTO 메인화면으로 이동
-                goTempActivity();
+                goMainActivity();
                 finish();
             }
         }// if...else
 
     }// end onActivityResult
-    private void goTempActivity(){
-        Intent i=new Intent(LoginActivity.this, AdminActivity.class );
+    private void goMainActivity(){
+        Intent i=new Intent(LoginActivity.this, MainActivity.class );
         startActivity(i);
     }
 
