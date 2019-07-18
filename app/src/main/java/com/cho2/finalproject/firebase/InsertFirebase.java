@@ -31,6 +31,6 @@ public class InsertFirebase {
     // 예약 취소 함수
     public static void cancelReservation(ReservationBean reservationBean){
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
-        dbRef.child("reservations").child(reservationBean.mReserveBuilding).child(reservationBean.mReserveRoom+"호").child(reservationBean.makeDate()).child(reservationBean.mReserveTime).removeValue();
+        dbRef.child("reservations").child(reservationBean.step1BuildName).child(reservationBean.step3RoomName+"호").child(reservationBean.makeDate()).child(reservationBean.mReserveTime).removeValue();
     }
 } // end InserFirebase

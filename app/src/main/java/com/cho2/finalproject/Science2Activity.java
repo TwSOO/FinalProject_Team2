@@ -36,8 +36,7 @@ public class Science2Activity extends AppCompatActivity {
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                reservationBean.mReserveMonth = Integer.toString(month + 1);
-                reservationBean.mReserveDay = Integer.toString(dayOfMonth);
+                reservationBean.makeDate(year, month, dayOfMonth);
 
                 String txtDate = year + "년 " + (month + 1) + "월 " + dayOfMonth + "일";
                 tvDate.setText(txtDate);

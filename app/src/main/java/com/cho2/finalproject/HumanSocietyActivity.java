@@ -20,6 +20,7 @@ public class HumanSocietyActivity extends AppCompatActivity {
     Button btnNext;
     private ReservationBean reservationBean;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,8 +37,7 @@ public class HumanSocietyActivity extends AppCompatActivity {
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
             public void onSelectedDayChange(@NonNull CalendarView calendarView, int year, int month, int dayOfMonth) {
-                reservationBean.mReserveMonth = Integer.toString(month + 1);
-                reservationBean.mReserveDay = Integer.toString(dayOfMonth);
+                reservationBean.makeDate(year, month, dayOfMonth);
 
                 String txtDate = year + "년 " + (month + 1) + "월 " + dayOfMonth + "일";
                 tvDate.setText(txtDate);
