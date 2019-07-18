@@ -33,4 +33,6 @@ public class InsertFirebase {
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
         dbRef.child("reservations").child(reservationBean.step1BuildName).child(reservationBean.step3RoomName+"호").child(reservationBean.makeDate()).child(reservationBean.mReserveTime).removeValue();
     }
+
+
 } // end InserFirebase
