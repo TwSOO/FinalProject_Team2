@@ -5,7 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MyPageActivity">
+    tools:context=".MyPageActivity"
+    android:weightSum="1"
+    android:layout_margin="10dp">
 
     <TextView
         android:id="@+id/textView"
@@ -13,10 +15,10 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
         android:layout_marginEnd="20dp"
-        android:layout_marginBottom="1dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginBottom="10dp"
         android:text="마이페이지"
         android:textSize="55dp"
+        android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.048"
@@ -28,142 +30,60 @@
         android:id="@+id/textView2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="5dp"
         android:text="예약내역확인"
-        android:layout_marginTop="30dp"
         android:textSize="20dp"/>
 
-
-    <TableLayout
-        android:layout_width="fill_parent"
-        android:layout_height="0dp"
-        android:layout_weight="0.5"
-        android:stretchColumns="*">
-
-
-    <TableRow
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/border">
+        android:layout_height="45dp"
+        android:weightSum="4"
+        android:orientation="horizontal">
 
         <TextView
-            android:id="@+id/txtDate"
-            android:layout_width="wrap_content"
+            android:layout_width="0dp"
             android:layout_height="match_parent"
-            android:layout_marginLeft="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_weight="1"
             android:gravity="center"
-            android:padding="3dp"
             android:text="예약건물"
-            android:textSize="20dp" />
+            android:textSize="22dp"/>
 
         <TextView
-            android:id="@+id/txtCondition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:padding="3dp"
-            android:text="예약호실"
-            android:textSize="20dp" />
+            android:text="예약호수"
+            android:textSize="22dp"/>
 
         <TextView
-            android:id="@+id/txtCondition"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:padding="3dp"
-            android:text="시간대"
-            android:textSize="20dp"/>
+            android:text="예약시간"
+            android:textSize="22dp"/>
 
         <TextView
-            android:id="@+id/txtDetail"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="1dp"
-            android:layout_marginBottom="1dp"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
             android:gravity="center"
-            android:padding="3dp"
-            android:text="취소하기"
-            android:textSize="20dp"/>
+            android:text="예약취소"
+            android:textSize="22dp"/>
 
-    </TableRow>
-
-
-
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border">
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp"/>
-
-            <Button
-                android:id="@+id/btnCancel"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="취소" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp"/>
-
-        </TableRow>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    </TableLayout>
-
-    <Button
-        android:id="@+id/button"
+    </LinearLayout>
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="관리자페이지로 넘어가기만하는 버튼" />
+        android:layout_height="0dp"
+        android:layout_weight="0.8">
+        <ListView
+            android:id="@+id/listMyPage"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+    </LinearLayout>
+
+
 
 
 </LinearLayout>
