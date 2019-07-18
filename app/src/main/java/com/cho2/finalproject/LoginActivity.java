@@ -1,5 +1,6 @@
 package com.cho2.finalproject;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
@@ -195,7 +196,7 @@ public class LoginActivity extends AppCompatActivity {
 
     }// end onActivityResult
     private void goTempActivity(){
-        Intent i=new Intent(LoginActivity.this, MainActivity.class );
+        Intent i=new Intent(LoginActivity.this, AdminActivity.class );
         startActivity(i);
     }
 
