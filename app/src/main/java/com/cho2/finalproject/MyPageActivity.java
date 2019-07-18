@@ -9,6 +9,10 @@ import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.ReservationBean;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
 public class MyPageActivity extends AppCompatActivity {
 
     @Override
@@ -51,4 +55,5 @@ public class MyPageActivity extends AppCompatActivity {
     }
 
 
-}
+
+} // end class
