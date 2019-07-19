@@ -77,6 +77,8 @@ public class MyPageAdapter extends BaseAdapter {
 
         final ReservationCompleteBean rcBean = mReservationList.get(position);
 
+        final TimeBean timeBean = mTimeList.get(position);
+
          //xml파일을 맵핑
         TextView txtResBuilding=view.findViewById(R.id.txtResBuilding); //건물
         final TextView txtTime = view.findViewById(R.id.txtResTime); //시간
@@ -118,7 +120,7 @@ public class MyPageAdapter extends BaseAdapter {
 
 
                 // 로그인한 사용자에게서 예약데이터 삭제
-                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() ); // 예약한 사람 uuid 받아와야함
+                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
 
                 mMemberBean.reservationCompleteList.remove(position);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
@@ -145,7 +147,11 @@ public class MyPageAdapter extends BaseAdapter {
                     }
                 });
 
+                Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
 
+                Intent intent = new Intent(mContext, MyPageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(intent);
             }
         });
         alertDialog.setNegativeButton("아니오", null);

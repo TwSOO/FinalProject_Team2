@@ -137,22 +137,26 @@ public class AdminPageAdapter extends BaseAdapter {
                 mMemberBean.reservationCompleteList.remove( timeIndex );
 
 
-                // 로그인한 사용자에게서 예약데이터 삭제
-                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() );
+//                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() );
                 //사용자 찾기
-                mFirebaseDatabase.getReference().child("members").child(uuid).addListenerForSingleValueEvent(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        final MemberBean memberBean = dataSnapshot.getValue(MemberBean.class);
+                //관리자라면 전체 예약 내역 조회
+                if(mMemberBean.isAdmin){
+                    // 로그인한 사용자에게서 예약데이터 삭제
 
-                        memberBean.reservationCompleteList.remove(position);
+                    mFirebaseDatabase.getReference().child("reservations").child().addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                            final MemberBean memberBean = dataSnapshot.getValue(MemberBean.class);
 
-                        mFirebaseDatabase.getReference().child("members").child(uuid).setValue(memberBean);
-                    } // onDataChange
+                            memberBean.reservationCompleteList.remove(position);
 
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {}
-                });
+                            mFirebaseDatabase.getReference().child("members").child(uuid).setValue(memberBean);
+                        } // onDataChange
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError databaseError) {
+                        }
+                    });
 
 
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
