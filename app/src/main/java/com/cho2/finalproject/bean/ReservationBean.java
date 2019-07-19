@@ -45,7 +45,7 @@ public class ReservationBean implements Serializable {
     public void makeDate(int year, int month, int dayOfMonth){
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");
         Calendar calendar = Calendar.getInstance();
-        calendar.set(2019, (month + 1), dayOfMonth);
+        calendar.set(2019, month , dayOfMonth);
         step2Day = sdf.format(calendar.getTime());
         Log.e("makeDate()", "makeDate() 리턴값 : " + step2Day);
     }
