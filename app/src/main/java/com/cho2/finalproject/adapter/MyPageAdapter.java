@@ -93,19 +93,19 @@ public class MyPageAdapter extends BaseAdapter {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancel(position, timeBean);
+                cancel(rcBean, position);
             }
         });
         return view;
     }
 
 
-    public void cancel(final ReservationCompleteBean rcBean, final int position, String time){
+    public void cancel(final ReservationCompleteBean rcBean, final int position){
 
         // 선택된 rcBean에 해당하는 Index값을 가지고 reservation List로 가서 true값으로 바꿈
         final int timeIndex = rcBean.timeIndex;
 
-
+        String time = rcBean.step2Time;
 
 
 
@@ -117,10 +117,8 @@ public class MyPageAdapter extends BaseAdapter {
             public void onClick(DialogInterface dialogInterface, int i) {
 
 
-
-                ///////////////////////////진짜
                 // 로그인한 사용자에게서 예약데이터 삭제
-                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() );
+                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() ); // 예약한 사람 uuid 받아와야함
 
                 mMemberBean.reservationCompleteList.remove(position);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
