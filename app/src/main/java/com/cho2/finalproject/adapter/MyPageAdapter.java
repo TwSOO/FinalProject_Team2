@@ -14,31 +14,26 @@ import android.widget.Toast;
 
 import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
-import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.bean.ReservationBean;
 import com.cho2.finalproject.bean.TimeBean;
-import com.cho2.finalproject.firebase.InsertFirebase;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.List;
 
-public class TImeAdapter extends BaseAdapter {
+public class MyPageAdapter extends BaseAdapter {
 
     private Context mContext;
     private ReservationBean mReservationBean;
-    private MemberBean mMemberBean;
     private List<TimeBean> mTimeList;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference dbRef;
 
-    public TImeAdapter(Context context, ReservationBean reservationBean, MemberBean memberBean) {
+    public MyPageAdapter(Context context, ReservationBean reservationBean) {
         mContext = context;
         mReservationBean = reservationBean;
-        mMemberBean = memberBean;
         mTimeList = mReservationBean.getTimeList();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         dbRef = mFirebaseDatabase.getReference();
@@ -117,17 +112,7 @@ public class TImeAdapter extends BaseAdapter {
                 //기존 item 교체
                 mReservationBean.getTimeList().set(position, timeBean);
 
-                //예약 DB update
                 dbRef.child("reservations").child(mReservationBean.step1BuildName).child(mReservationBean.step2Day).child(mReservationBean.step3RoomName).setValue(mReservationBean);
-
-                //사용자 DB update
-                if( mMemberBean.reservationList == null) {
-                    mMemberBean.reservationList = new ArrayList<>();
-                }
-                mMemberBean.reservationList.add(mReservationBean);
-                String uuid = InsertFirebase.getUserIdFromUUID(mMemberBean.userEmail);
-                dbRef.child("members").child(uuid).setValue(mMemberBean);
-
                 Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(mContext, MyPageActivity.class);
