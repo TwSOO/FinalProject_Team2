@@ -65,6 +65,7 @@ public class AdminPageAdapter extends BaseAdapter {
         txtResRoom.setText(rcBean.step3RoomName);
         txtDate.setText(rcBean.step2Day);
         return view;
+
     }
 
 

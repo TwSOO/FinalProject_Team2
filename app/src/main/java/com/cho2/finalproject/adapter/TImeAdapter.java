@@ -145,6 +145,6 @@ public class TImeAdapter extends BaseAdapter {
         alertDialog.setNegativeButton("아니오", null);
         alertDialog.create().show();
 
-    }
+    } // end reservation
 
 }
