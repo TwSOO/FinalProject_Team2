@@ -17,6 +17,7 @@ import androidx.annotation.NonNull;
 import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
 import com.cho2.finalproject.bean.MemberBean;
+import com.cho2.finalproject.bean.ReservationBean;
 import com.cho2.finalproject.bean.ReservationCompleteBean;
 import com.cho2.finalproject.bean.TimeBean;
 import com.cho2.finalproject.firebase.InsertFirebase;
@@ -37,6 +38,10 @@ public class AdminPageAdapter extends BaseAdapter {
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference dbRef;
     private List<ReservationCompleteBean> mReservationList;
+    private ReservationBean mReservationBean;
+    private MemberBean mMemberBean;
+    private List<TimeBean> mTimeList;
+
 
 
     public AdminPageAdapter(Context context, List<ReservationCompleteBean> reservationList) {
@@ -63,6 +68,7 @@ public class AdminPageAdapter extends BaseAdapter {
 
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
+
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.view_admin_item, null);
 

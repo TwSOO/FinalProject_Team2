@@ -144,10 +144,6 @@ public class MyPageAdapter extends BaseAdapter {
                 mMemberBean.reservationCompleteList.remove( timeIndex );
 
 
-
-
-
-
                 // 로그인한 사용자에게서 예약데이터 삭제
                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() );
                 //사용자 찾기
@@ -164,29 +160,6 @@ public class MyPageAdapter extends BaseAdapter {
                     @Override
                     public void onCancelled(@NonNull DatabaseError databaseError) {}
                 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
 
