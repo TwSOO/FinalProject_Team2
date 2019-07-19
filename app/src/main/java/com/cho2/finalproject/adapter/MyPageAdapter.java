@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.cho2.finalproject.R;
 import com.cho2.finalproject.bean.ReservationCompleteBean;
@@ -50,13 +52,17 @@ public class MyPageAdapter extends BaseAdapter {
 
         final ReservationCompleteBean rcBean = mReservationList.get(position);
 
-        // xml파일을 맵핑
-//        TextView txtTime = view.findViewById(R.id.txtTime);
-//        TextView txtReservation = view.findViewById(R.id.txtResvState);
-//        Button btnReservation = view.findViewById(R.id.btnReserve);
+         //xml파일을 맵핑
+        TextView txtResBuilding=view.findViewById(R.id.txtResBuilding); //건물
+        TextView txtTime = view.findViewById(R.id.txtResTime); //시간
+        TextView txtResRoom = view.findViewById(R.id.txtResRoom); //강의실
+        TextView txtDate=view.findViewById(R.id.txtResDate);
+        Button btnCancel = view.findViewById(R.id.btnCancel);
 
-
-
+        txtResBuilding.setText(rcBean.step1BuildName);
+        txtTime.setText(rcBean.step2Time);
+        txtResRoom.setText(rcBean.step3RoomName);
+        txtDate.setText(rcBean.step2Day);
         return view;
     }
 
