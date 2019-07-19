@@ -58,7 +58,9 @@ public class Spinner4Activity extends AppCompatActivity { //2과 스피너
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.",
                         Toast.LENGTH_SHORT).show();
-                reservationBean.step3RoomName= arrayList.get(i);
+                if(i!=0){
+                    reservationBean.step3RoomName= arrayList.get(i);
+                }
             }
             @Override
             public void onNothingSelected(AdapterView<?> adapterView) {
@@ -69,12 +71,21 @@ public class Spinner4Activity extends AppCompatActivity { //2과 스피너
         btnOk.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
-                intent.putExtra("reservation", reservationBean);
-                startActivity(intent);
+                if(confirm()){
+                    Intent intent = new Intent(getApplicationContext(), ReservationActivity.class);
+                    intent.putExtra("reservation", reservationBean);
+                    startActivity(intent);}
+                else return;
             }
         });
-
-
+    }
+    private boolean confirm(){
+        boolean result=false;
+        if (reservationBean.step3RoomName==null){
+            Toast.makeText(this, "강의실을 선택해주세요",Toast.LENGTH_LONG).show();
+            return result;
+        }
+        result=true;
+        return result;
     }
 }
