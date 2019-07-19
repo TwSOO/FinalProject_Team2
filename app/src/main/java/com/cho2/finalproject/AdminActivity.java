@@ -1,15 +1,11 @@
 package com.cho2.finalproject;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -71,12 +67,13 @@ public class AdminActivity extends AppCompatActivity {
             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
 
                 for(DataSnapshot snapshot : dataSnapshot.getChildren()){
-                    List<MemberBean> memberBeans = snapshot.getValue();
+                    MemberBean memberBean = snapshot.getValue(MemberBean.class);
                     if(memberBean.reservationCompleteList!= null){
                         // 각 멤버의 예약된 리스트가 있으면 리스트뷰에 add함
                         mReservationCompleatBeanList.addAll(memberBean.reservationCompleteList);
                     } // if
                 } // for
+
             } //  onDataChange
 
             @Override
