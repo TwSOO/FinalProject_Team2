@@ -3,6 +3,8 @@ package com.cho2.finalproject;
 import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -25,6 +27,11 @@ public class ReservationActivity extends AppCompatActivity {
     private ReservationBean mReservationBean;
     private TImeAdapter mTimeAdapter;
     private ListView mListView;
+
+    // 선택된 사항 표시하는 텍스트뷰
+    private TextView mTxtBuilding;
+    private TextView mTxtDate;
+    private TextView mTxtRoom;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,6 +72,20 @@ public class ReservationActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
+        // 뷰 획득
+        mTxtBuilding = findViewById(R.id.txtBuilding);
+        mTxtDate = findViewById(R.id.txtDate);
+        mTxtRoom = findViewById(R.id.txtRoom);
+
+        // 앞에서 선택된 사항 보여주기
+        mTxtBuilding.setText(mReservationBean .step1BuildName);
+        mTxtDate.setText(mReservationBean .step2Day);
+        mTxtRoom.setText(mReservationBean .step3RoomName + "호");
+
+        ListView listView = findViewById(R.id.listView);
+        mTimeAdapter = new TImeAdapter(this, mReservationBean );
+
+        listView.setAdapter(mTimeAdapter);
 
     }
 

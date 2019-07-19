@@ -24,7 +24,7 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".TempAdminActivity"></activity>
+
         <activity android:name=".AdminActivity" />
         <activity android:name=".FifAnnivActivity" />
         <activity android:name=".HumanSocietyActivity" />
@@ -36,7 +36,7 @@
         <activity android:name=".Spinner4Activity" />
         <activity android:name=".Science1Activity" />
         <activity android:name=".Science2Activity" />
-        <activity android:name=".TempActivity" />
+
         <activity android:name=".JoinAcitivity" />
         <activity android:name=".MainActivity" />
         <activity android:name=".LoginActivity">

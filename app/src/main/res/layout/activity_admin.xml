@@ -40,18 +40,17 @@
         android:textSize="20dp" />
 
 
-    <TableLayout
-        android:layout_width="fill_parent"
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="0.5"
-        android:stretchColumns="*">
+        android:orientation="vertical">
 
 
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:text="예약자 날짜순으로 보기"
             android:textSize="20dp" />
 
@@ -61,113 +60,53 @@
             android:layout_height="38dp"
             android:autofillHints="7월"></Spinner>
 
-
-
-        <TableRow
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/border">
 
             <TextView
                 android:id="@+id/txtDate"
-                android:layout_width="wrap_content"
+                android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
                 android:gravity="center"
-                android:padding="3dp"
+                android:layout_weight="1"
                 android:text="일자"
                 android:textSize="20dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:padding="3dp"
                 android:text="예약시간"
                 android:textSize="20dp" />
 
             <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:padding="3dp"
                 android:text="예약상태"
                 android:textSize="20dp" />
 
             <TextView
                 android:id="@+id/txtDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
                 android:gravity="center"
-                android:padding="3dp"
                 android:text="상세보기"
                 android:textSize="20dp" />
 
-        </TableRow>
+        </LinearLayout>
 
-
-
-        <TableRow
+        <ListView
+            android:id="@+id/adminListView"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/border">
+            android:layout_height="match_parent"></ListView>
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp"/>
-
-            <Button
-                android:id="@+id/btnDetail"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="상세보기" />
-
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="1dp"
-                android:layout_marginBottom="1dp"
-                android:gravity="center"
-                android:padding="3dp"
-                android:textSize="20dp"/>
-
-        </TableRow>
-
-
-
-
-
-    </TableLayout>
+    </LinearLayout>
 
 
 </LinearLayout>
