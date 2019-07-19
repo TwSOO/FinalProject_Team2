@@ -12,11 +12,15 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="64dp"
-        android:layout_marginBottom="30dp"
-
-
         android:text="인문사회관"
         android:textSize="40sp" />
+    <TextView
+        android:id="@+id/txtSelectDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="date"
+        android:textSize="20dp"
+        android:layout_marginBottom="20dp"/>
 
     <Spinner
         android:id="@+id/spinner1"

@@ -9,6 +9,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -22,15 +23,22 @@ public class Spinner1Activity extends AppCompatActivity { //인사대 스피너
     private Spinner spinner1;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
-
+    private TextView mTxtDate;;
     private ReservationBean reservationBean;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_spinner1);
+
+
+
         reservationBean = (ReservationBean)getIntent().getSerializableExtra("reservation");
         Log.e("reservationBean", "reservationBean 내용"+reservationBean.toString());
+
+        // 선택된 날짜 텍스트뷰 획득
+        mTxtDate = findViewById(R.id.txtSelectDate);
+        mTxtDate.setText(reservationBean.step2Day);
 
         arrayList = new ArrayList<>();
         arrayList.add("강의실을 선택하세요");

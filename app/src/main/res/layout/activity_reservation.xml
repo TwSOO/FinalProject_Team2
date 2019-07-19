@@ -15,14 +15,45 @@
         android:text="예약화면"
         android:textSize="30dp"
         android:textStyle="bold"
-        android:layout_marginBottom="10dp"
+        android:layout_marginBottom="5dp"
         />
 
-    <TextView
-        android:id="@+id/txtBD"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textSize="26dp"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="30dp"
+        android:weightSum="3">
+
+        <TextView
+            android:id="@+id/txtBuilding"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#68000000"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtDate"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#68000000"
+            android:textSize="24sp" />
+
+        <TextView
+            android:id="@+id/txtRoom"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:text=""
+            android:textColor="#68000000"
+            android:textSize="24sp" />
+    </LinearLayout>
+
 
     <LinearLayout
         android:layout_width="match_parent"
