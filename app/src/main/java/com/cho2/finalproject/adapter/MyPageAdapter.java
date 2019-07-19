@@ -77,7 +77,7 @@ public class MyPageAdapter extends BaseAdapter {
 
         final ReservationCompleteBean rcBean = mReservationList.get(position);
 
-        final TimeBean timeBean = mTimeList.get(position);
+
 
          //xml파일을 맵핑
         TextView txtResBuilding=view.findViewById(R.id.txtResBuilding); //건물

@@ -69,6 +69,7 @@ public class AdminPageAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
 
+
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.view_admin_item, null);
 
@@ -90,76 +91,53 @@ public class AdminPageAdapter extends BaseAdapter {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancel(position, timeBean);
+                cancel(rcBean, position);
             }
 
         });
         return view;
     }
-    public void cancel(ReservationCompleteBean rcBean, final int position, final TimeBean timeBean, int timeindex){
+    public void cancel(final ReservationCompleteBean rcBean, final int position){
 
         // 선택된 rcBean에 해당하는 Index값을 가지고 reservation List로 가서 true값으로 바꿈
         final int timeIndex = rcBean.timeIndex;
 
-        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        String time = rcBean.step2Time;
+
+        final AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
         alertDialog.setTitle("예약확인"); //이것도 가운데로 정렬하고 싶음.
-        alertDialog.setMessage("시간: " + timeBean.timeTitle + "\n예약취소하시겠습니까?"); //가운데 정렬로 하고싶음.
+        alertDialog.setMessage("시간: " + time + "\n예약취소하시겠습니까?"); //가운데 정렬로 하고싶음.
         alertDialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
 
-                timeBean.isReservation = false;
-                timeBean.userId = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+                // 로그인한 사용자에게서 예약데이터 삭제
+                final String uuid = InsertFirebase.getUserIdFromUUID( rcBean.mEmail ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
 
-                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HH:mm");
-                try {
-                    //시작시간
-                    timeBean.startMilliTime = sdf.parse(mReservationBean.step2Day + " " + timeBean.timeTitle).getTime();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
-                //기존 item 교체
-                mReservationBean.getTimeList().set(position, timeBean);
-
-                //예약 DB update
-                dbRef.child("reservations").child(mReservationBean.step1BuildName).child(mReservationBean.step2Day).child(mReservationBean.step3RoomName).setValue(mReservationBean);
-
-                //사용자 DB update
-                if( mMemberBean.reservationCompleteList == null) {
-                    mMemberBean.reservationCompleteList = new ArrayList<>();
-                }
-                ReservationCompleteBean rcBean = new ReservationCompleteBean();
-                rcBean.step1BuildName = mReservationBean.step1BuildName;
-                rcBean.step2Day = mReservationBean.step2Day;
-                rcBean.step2Time = timeBean.timeTitle;
-                rcBean.step3RoomName = mReservationBean.step3RoomName;
-                rcBean.timeIndex = position;
-                mMemberBean.reservationCompleteList.remove( timeIndex );
-
-
-//                final String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() );
-                //사용자 찾기
-                //관리자라면 전체 예약 내역 조회
-                if(mMemberBean.isAdmin){
-                    // 로그인한 사용자에게서 예약데이터 삭제
-
-                    mFirebaseDatabase.getReference().child("reservations").child().addListenerForSingleValueEvent(new ValueEventListener() {
-                        @Override
-                        public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                            final MemberBean memberBean = dataSnapshot.getValue(MemberBean.class);
-
-                            memberBean.reservationCompleteList.remove(position);
-
-                            mFirebaseDatabase.getReference().child("members").child(uuid).setValue(memberBean);
-                        } // onDataChange
-
-                        @Override
-                        public void onCancelled(@NonNull DatabaseError databaseError) {
-                        }
-                    });
-
-
+                mMemberBean.reservationCompleteList.remove(position);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
+
+                // 데이터베이스의 reservations 폴더에서 예약 데이터 변경
+                dbRef.child("reservations").child(rcBean.step1BuildName).child(rcBean.step2Day).child(rcBean.step3RoomName).addListenerForSingleValueEvent (new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        ReservationBean reservationBean = dataSnapshot.getValue(ReservationBean.class);
+                        List<TimeBean> timeBeanList = reservationBean.getTimeList();
+
+                        TimeBean timeBean1 = timeBeanList.get(timeIndex);
+                        timeBean1.isReservation = false;
+
+                        timeBeanList.add(timeIndex, timeBean1);
+                        reservationBean.setTImeList(timeBeanList);
+
+                        dbRef.child(reservationBean.step1BuildName).child(reservationBean.step2Day).child(reservationBean.step3RoomName).setValue(reservationBean);
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
 
                 Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
 
