@@ -5,6 +5,7 @@ public class TimeBean {
     public String timeTitle;
     public boolean isReservation;
     public long startMilliTime; //예약시작 시간 millisecond
+    public String userId;
 
     public TimeBean(String timeTitle, boolean isReservation, long startMilliTime) {
         this.timeTitle = timeTitle;
