@@ -84,6 +84,7 @@ public class Spinner4Activity extends AppCompatActivity { //2과 스피너
         if (reservationBean.step3RoomName==null){
             Toast.makeText(this, "강의실을 선택해주세요",Toast.LENGTH_LONG).show();
             return result;
+            //ㅎ
         }
         result=true;
         return result;
