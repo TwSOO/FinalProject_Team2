@@ -10,7 +10,9 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import com.cho2.finalproject.R;
+import com.cho2.finalproject.bean.ReservationBean;
 import com.cho2.finalproject.bean.ReservationCompleteBean;
+import com.cho2.finalproject.firebase.InsertFirebase;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -55,7 +57,7 @@ public class MyPageAdapter extends BaseAdapter {
 
          //xml파일을 맵핑
         TextView txtResBuilding=view.findViewById(R.id.txtResBuilding); //건물
-        TextView txtTime = view.findViewById(R.id.txtResTime); //시간
+        final TextView txtTime = view.findViewById(R.id.txtResTime); //시간
         TextView txtResRoom = view.findViewById(R.id.txtResRoom); //강의실
         TextView txtDate=view.findViewById(R.id.txtResDate);
         Button btnCancel = view.findViewById(R.id.btnCancel);
@@ -65,6 +67,13 @@ public class MyPageAdapter extends BaseAdapter {
         txtTime.setText(rcBean.step2Time);
         txtResRoom.setText(rcBean.step3RoomName);
         txtDate.setText(rcBean.step2Day);
+
+        btnCancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                InsertFirebase.cancelReservation(rcBean,rcBean.step2Time);
+            }
+        });
         return view;
     }
 

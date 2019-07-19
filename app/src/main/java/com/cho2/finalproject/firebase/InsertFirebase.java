@@ -8,6 +8,7 @@ import androidx.annotation.Nullable;
 import com.cho2.finalproject.JoinAcitivity;
 import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.bean.ReservationBean;
+import com.cho2.finalproject.bean.ReservationCompleteBean;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -29,7 +30,7 @@ public class InsertFirebase {
     }
 
     // 예약 취소 함수
-    public static void cancelReservation(ReservationBean reservationBean, String time){
+    public static void cancelReservation(ReservationCompleteBean reservationBean, String time){
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
         dbRef.child("reservations").child(reservationBean.step1BuildName).child(reservationBean.step2Day).child(reservationBean.step3RoomName).child(time).removeValue();
     }
