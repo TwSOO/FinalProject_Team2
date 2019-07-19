@@ -93,7 +93,7 @@ public class MyPageAdapter extends BaseAdapter {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancel(rcBean, position, rcBean.step2Time);
+                cancel(position, timeBean);
             }
         });
         return view;
