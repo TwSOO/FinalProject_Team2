@@ -1,6 +1,9 @@
 package com.cho2.finalproject.adapter;
 
+import android.app.AlertDialog;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,27 +12,34 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
+import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.bean.ReservationBean;
+import com.cho2.finalproject.bean.ReservationCompleteBean;
 import com.cho2.finalproject.bean.TimeBean;
+import com.cho2.finalproject.firebase.InsertFirebase;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.List;
 
 public class TImeAdapter extends BaseAdapter {
 
     private Context mContext;
     private ReservationBean mReservationBean;
+    private MemberBean mMemberBean;
     private List<TimeBean> mTimeList;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference dbRef;
 
-
-
-    public TImeAdapter(Context context, ReservationBean reservationBean) {
+    public TImeAdapter(Context context, ReservationBean reservationBean, MemberBean memberBean) {
         mContext = context;
         mReservationBean = reservationBean;
+        mMemberBean = memberBean;
         mTimeList = mReservationBean.getTimeList();
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         dbRef = mFirebaseDatabase.getReference();
@@ -51,7 +61,7 @@ public class TImeAdapter extends BaseAdapter {
     }
 
     @Override
-    public View getView(int position, View view, ViewGroup viewGroup) {
+    public View getView(final int position, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.view_resv, null);
 
@@ -66,53 +76,75 @@ public class TImeAdapter extends BaseAdapter {
         txtTime.setText(timeBean.timeTitle);
         if(timeBean.isReservation){
             txtReservation.setText("예약완료");
+            btnReservation.setVisibility(View.INVISIBLE);
         }
         else{
             txtReservation.setText("예약가능");
+            btnReservation.setVisibility(View.VISIBLE);
         }
+        //예약하기 버튼 클릭
         btnReservation.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                reservation(timeBean.timeTitle);
+
+                reservation(position, timeBean);
+
             }
         });
-
-
 
         return view;
     }
 
 
-    private void reservation(String reservationTime){
+    private void reservation(final int position, final TimeBean timeBean){
 
-        dbRef.child("reservations").child(mReservationBean.step1BuildName).child(mReservationBean.step2Day).child(mReservationBean.step3RoomName).child(reservationTime).setValue(mReservationBean.mEmail);
-        Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(mContext);
+        alertDialog.setTitle("예약확인"); //이것도 가운데로 정렬하고 싶음.
+        alertDialog.setMessage("시간: " + timeBean.timeTitle + "\n예약하시겠습니까?"); //가운데 정렬로 하고싶음.
+        alertDialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+
+                timeBean.isReservation = true;
+                timeBean.userId = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd HH:mm");
+                try {
+                    //시작시간
+                    timeBean.startMilliTime = sdf.parse(mReservationBean.step2Day + " " + timeBean.timeTitle).getTime();
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                //기존 item 교체
+                mReservationBean.getTimeList().set(position, timeBean);
+
+                //예약 DB update
+                dbRef.child("reservations").child(mReservationBean.step1BuildName).child(mReservationBean.step2Day).child(mReservationBean.step3RoomName).setValue(mReservationBean);
+
+                //사용자 DB update
+                if( mMemberBean.reservationCompleteList == null) {
+                    mMemberBean.reservationCompleteList = new ArrayList<>();
+                }
+                ReservationCompleteBean rcBean = new ReservationCompleteBean();
+                rcBean.step1BuildName = mReservationBean.step1BuildName;
+                rcBean.step2Day = mReservationBean.step2Day;
+                rcBean.step2Time = timeBean.timeTitle;
+                rcBean.step3RoomName = mReservationBean.step3RoomName;
+                rcBean.timeIndex = position;
+                mMemberBean.reservationCompleteList.add( rcBean );
+                String uuid = InsertFirebase.getUserIdFromUUID(mMemberBean.userEmail);
+                dbRef.child("members").child(uuid).setValue(mMemberBean);
+
+                Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
+
+                Intent intent = new Intent(mContext, MyPageActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                mContext.startActivity(intent);
+            }
+        });
+        alertDialog.setNegativeButton("아니오", null);
+        alertDialog.create().show();
 
     }
-
-    //10시버튼
-//        findViewById(R.id.btnRes10).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                AlertDialog.Builder alertDialog = new AlertDialog.Builder(ReservationActivity.this);
-//                alertDialog.setTitle("예약확인"); //이것도 가운데로 정렬하고 싶음.
-//                alertDialog.setMessage("시간:10:00~11:00\n예약하시겠습니까?"); //가운데 정렬로 하고싶음.
-//                alertDialog.setPositiveButton("OK", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) {
-//                        reservationBean.mReserveTime = "10:00";
-//                        reservation(reservationBean);
-//                        Intent intent = new Intent(ReservationActivity.this, MyPageActivity.class);
-//                        intent.putExtra("reservation", reservationBean);
-//                        startActivity(intent);
-//                    }
-//                });
-//                alertDialog.setNeutralButton("취소", new DialogInterface.OnClickListener() {
-//                    @Override
-//                    public void onClick(DialogInterface dialogInterface, int i) { }
-//                });
-//                alertDialog.show();
-//            }
-//        });
 
 }

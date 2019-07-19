@@ -9,6 +9,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -23,6 +24,7 @@ public class AdminActivity extends AppCompatActivity {
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     private String mAdminEmail;
+    private ListView adminListView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,6 +43,9 @@ public class AdminActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        // 리스트뷰 획득
+        adminListView =findViewById(R.id.adminListView);
 
         arrayList = new ArrayList<>();
         arrayList.add("7월");
@@ -73,7 +78,7 @@ public class AdminActivity extends AppCompatActivity {
 
 
 
-        findViewById(R.id.btnDetail).setOnClickListener(new View.OnClickListener() {
+       /* findViewById(R.id.btnDetail).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 AlertDialog.Builder alertDialog = new AlertDialog.Builder(AdminActivity.this);
@@ -93,6 +98,6 @@ public class AdminActivity extends AppCompatActivity {
                 });
                 alertDialog.show();
             }
-        });
+        });*/
     }
 }

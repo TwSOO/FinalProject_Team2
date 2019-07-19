@@ -11,4 +11,7 @@ public class MemberBean implements Serializable {
     public String name;//학생 이름
     public boolean isAdmin;//관리자 계정 구분
 
+    //예약된 목록
+    public List<ReservationCompleteBean> reservationCompleteList;
+
 }

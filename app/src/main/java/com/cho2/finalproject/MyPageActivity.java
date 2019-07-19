@@ -1,57 +1,48 @@
 package com.cho2.finalproject;
 
-import android.app.AlertDialog;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.Button;
+import android.widget.ListView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.cho2.finalproject.bean.ReservationBean;
-import com.google.firebase.database.DatabaseReference;
+import com.cho2.finalproject.adapter.MyPageAdapter;
+import com.cho2.finalproject.bean.MemberBean;
+import com.cho2.finalproject.firebase.InsertFirebase;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MyPageActivity extends AppCompatActivity {
+
+    private FirebaseDatabase mFirebaseDatabase = FirebaseDatabase.getInstance();
+    private ListView mListMyPage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_my_page);
 
-       /* findViewById(R.id.btnCancel).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder alertDialog = new AlertDialog.Builder(MyPageActivity.this);
-                alertDialog.setTitle("예약취소"); //이것도 가운데로 정렬하고 싶음.
-                alertDialog.setMessage("예약을 취소하시겠습니까?"); //가운데 정렬로 하고싶음.
-                alertDialog.setPositiveButton("예", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // 취소가 되어야함.
-                    }
-                });
-                alertDialog.setNegativeButton("아니오", new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialogInterface, int i) {
-                        // 아무일도 안일어나야 함.
-                    }
-                });
-                alertDialog.show();
-            }
-        });
+        mListMyPage = findViewById(R.id.listMyPage);
 
-        // 관리자페이지가 잘 되는지 보기위한 버튼일 뿐임.
-        Button button;
-        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
+        String uuid = InsertFirebase.getUserIdFromUUID( FirebaseAuth.getInstance().getCurrentUser().getEmail() );
+
+        mFirebaseDatabase.getReference().child("members").child(uuid).addValueEventListener(new ValueEventListener() {
             @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(MyPageActivity.this, AdminActivity.class);
-                startActivity(intent);
+            public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                MemberBean memberBean = dataSnapshot.getValue(MemberBean.class);
+
+                if(memberBean.reservationCompleteList != null) {
+                    MyPageAdapter myPageAdapter = new MyPageAdapter(MyPageActivity.this, memberBean.reservationCompleteList);
+                    mListMyPage.setAdapter(myPageAdapter);
+                }
             }
+
+            @Override
+            public void onCancelled(@NonNull DatabaseError databaseError) {}
         });
-        */
     }
 
 
