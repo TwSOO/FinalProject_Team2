@@ -4,7 +4,6 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ListView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
@@ -81,11 +80,6 @@ public class ReservationActivity extends AppCompatActivity {
         mTxtBuilding.setText(mReservationBean .step1BuildName);
         mTxtDate.setText(mReservationBean .step2Day);
         mTxtRoom.setText(mReservationBean .step3RoomName + "호");
-
-        ListView listView = findViewById(R.id.listView);
-        mTimeAdapter = new TImeAdapter(this, mReservationBean );
-
-        listView.setAdapter(mTimeAdapter);
 
     }
 
