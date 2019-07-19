@@ -33,6 +33,7 @@ public class InsertFirebase {
     public static String getUserIdFromUUID(String userEmail){
         long val = UUID.nameUUIDFromBytes(userEmail.getBytes()).getMostSignificantBits(); // 사용자 이메일을 고유 숫자값으로 바꿈
         return String.valueOf(val);
+
     }
 
 /*    // 예약 취소 함수
