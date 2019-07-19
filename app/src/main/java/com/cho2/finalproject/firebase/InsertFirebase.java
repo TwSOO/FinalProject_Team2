@@ -32,7 +32,6 @@ public class InsertFirebase {
     // 예약 취소 함수
     public static void cancelReservation(ReservationCompleteBean reservationBean, String time){
         DatabaseReference dbRef=mFirebaseDatabase.getReference();
-        dbRef.child("reservations").child(reservationBean.step1BuildName).child(reservationBean.step2Day).child(reservationBean.step3RoomName).child(time).removeValue();
     }
 
 
