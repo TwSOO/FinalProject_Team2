@@ -1,7 +1,6 @@
 package com.cho2.finalproject.adapter;
 
 import android.content.Context;
-import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,7 +15,7 @@ import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.List;
 
-public class MyPageAdapter extends BaseAdapter {
+public class AdminPageAdapter extends BaseAdapter {
 
     private Context mContext;
     private FirebaseDatabase mFirebaseDatabase;
@@ -24,7 +23,7 @@ public class MyPageAdapter extends BaseAdapter {
     private List<ReservationCompleteBean> mReservationList;
 
 
-    public MyPageAdapter(Context context, List<ReservationCompleteBean> reservationList) {
+    public AdminPageAdapter(Context context, List<ReservationCompleteBean> reservationList) {
         mContext = context;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         dbRef = mFirebaseDatabase.getReference();
@@ -49,7 +48,7 @@ public class MyPageAdapter extends BaseAdapter {
     @Override
     public View getView(final int position, View view, ViewGroup viewGroup) {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        view = inflater.inflate(R.layout.view_resv_item, null);
+        view = inflater.inflate(R.layout.view_admin_item, null);
 
         final ReservationCompleteBean rcBean = mReservationList.get(position);
 

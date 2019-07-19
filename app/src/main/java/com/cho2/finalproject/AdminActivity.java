@@ -13,6 +13,7 @@ import android.widget.Toast;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.adapter.AdminPageAdapter;
 import com.cho2.finalproject.adapter.MyPageAdapter;
 import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.bean.ReservationCompleteBean;
@@ -36,6 +37,9 @@ public class AdminActivity extends AppCompatActivity {
 
     // 데이터베이스 참조 객체
     FirebaseDatabase mFirebaseDatabse = FirebaseDatabase.getInstance();
+
+    //리스트뷰 어댑터
+    private AdminPageAdapter adminPageAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -74,6 +78,15 @@ public class AdminActivity extends AppCompatActivity {
                     } // if
                 } // for
 
+
+                if(mReservationCompleatBeanList != null){
+                    Log.e("AdminActitivity", "mReservationCompleatBeanList null 아님");
+                    // 어댑터 생성 및 원본 데이터 설정
+                    adminPageAdapter  = new AdminPageAdapter(AdminActivity.this, mReservationCompleatBeanList);
+                    // 리스트뷰에 어댑터 설정
+                    adminListView.setAdapter(adminPageAdapter);
+                }
+
             } //  onDataChange
 
             @Override
@@ -82,15 +95,7 @@ public class AdminActivity extends AppCompatActivity {
             }
         }); // addListenerForSingleValueEvent
 
-        if(mReservationCompleatBeanList != null){
-            // 어댑터 생성 및 원본 데이터 설정
-            MyPageAdapter myPageAdapter = new MyPageAdapter(this, mReservationCompleatBeanList);
 
-
-            // 리스트뷰에 어댑터 설정
-            adminListView.setAdapter(myPageAdapter);
-        }
-        Log.e("AdminActitivity", mReservationCompleatBeanList.toString());
 
         arrayList = new ArrayList<>();
         arrayList.add("7월");
@@ -120,5 +125,5 @@ public class AdminActivity extends AppCompatActivity {
             }
         });
 
-    }
+    } // onCreate
 }
