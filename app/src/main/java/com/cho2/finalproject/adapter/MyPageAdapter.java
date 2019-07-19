@@ -1,26 +1,16 @@
 package com.cho2.finalproject.adapter;
 
-import android.app.AlertDialog;
 import android.content.Context;
-import android.content.DialogInterface;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.Button;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
-import com.cho2.finalproject.bean.ReservationBean;
-import com.cho2.finalproject.bean.TimeBean;
-import com.google.firebase.auth.FirebaseAuth;
+import com.cho2.finalproject.bean.ReservationCompleteBean;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
-import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MyPageAdapter extends BaseAdapter {
@@ -28,10 +18,10 @@ public class MyPageAdapter extends BaseAdapter {
     private Context mContext;
     private FirebaseDatabase mFirebaseDatabase;
     private DatabaseReference dbRef;
-    List<ReservationBean> mReservationList;
+    private List<ReservationCompleteBean> mReservationList;
 
 
-    public MyPageAdapter(Context context, List<ReservationBean> reservationList) {
+    public MyPageAdapter(Context context, List<ReservationCompleteBean> reservationList) {
         mContext = context;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
         dbRef = mFirebaseDatabase.getReference();
@@ -58,7 +48,7 @@ public class MyPageAdapter extends BaseAdapter {
         LayoutInflater inflater = (LayoutInflater)mContext.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         view = inflater.inflate(R.layout.view_resv_item, null);
 
-        final ReservationBean reservationBean = mReservationList.get(position);
+        final ReservationCompleteBean rcBean = mReservationList.get(position);
 
         // xml파일을 맵핑
 //        TextView txtTime = view.findViewById(R.id.txtTime);

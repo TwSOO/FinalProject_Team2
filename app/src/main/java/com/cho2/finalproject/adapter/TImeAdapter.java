@@ -16,6 +16,7 @@ import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
 import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.bean.ReservationBean;
+import com.cho2.finalproject.bean.ReservationCompleteBean;
 import com.cho2.finalproject.bean.TimeBean;
 import com.cho2.finalproject.firebase.InsertFirebase;
 import com.google.firebase.auth.FirebaseAuth;
@@ -121,10 +122,16 @@ public class TImeAdapter extends BaseAdapter {
                 dbRef.child("reservations").child(mReservationBean.step1BuildName).child(mReservationBean.step2Day).child(mReservationBean.step3RoomName).setValue(mReservationBean);
 
                 //사용자 DB update
-                if( mMemberBean.reservationList == null) {
-                    mMemberBean.reservationList = new ArrayList<>();
+                if( mMemberBean.reservationCompleteList == null) {
+                    mMemberBean.reservationCompleteList = new ArrayList<>();
                 }
-                mMemberBean.reservationList.add(mReservationBean);
+                ReservationCompleteBean rcBean = new ReservationCompleteBean();
+                rcBean.step1BuildName = mReservationBean.step1BuildName;
+                rcBean.step2Day = mReservationBean.step2Day;
+                rcBean.step2Time = timeBean.timeTitle;
+                rcBean.step3RoomName = mReservationBean.step3RoomName;
+                rcBean.timeIndex = position;
+                mMemberBean.reservationCompleteList.add( rcBean );
                 String uuid = InsertFirebase.getUserIdFromUUID(mMemberBean.userEmail);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
 
