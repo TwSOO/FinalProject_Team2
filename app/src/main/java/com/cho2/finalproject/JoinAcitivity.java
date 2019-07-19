@@ -123,6 +123,38 @@ public class JoinAcitivity extends AppCompatActivity {
             return;
         }
 
+        firebaseAuthWithGoogle(mTokenId);// 파이어베이스에 회원가입 및 로그인함
+
+    } // end upload()
+
+    // Firebase 회원가입하면서 로그인까지 되는 것
+    private void firebaseAuthWithGoogle(String idToken){
+        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
+        mFirebaseAuth.signInWithCredential(credential)
+                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                    @Override
+                    public void onComplete(@NonNull Task<AuthResult> task) {
+                        if(task.isSuccessful()){
+                            // Firebase 로그인 성공
+                            Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
+                            Log.d(TAG, " >> Firebase 로그인 성공");
+
+                            uploadMemberDB();
+                        }
+                        else{
+                            // 로그인 실패
+                            Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
+                            Log.e(TAG, " >> 인증 실패"+task.getException());
+                            setResult(RESULT_CANCELED);
+                            finish();
+                        }
+                    }
+                });
+    } // end firebaseAuthWithGoogle
+
+
+    private void uploadMemberDB(){
+
         StorageReference storageRef = mFirebaseStorage.getReference();
         final StorageReference imageRef = storageRef.child("images/" + mCaptureUri.getLastPathSegment());
 
@@ -140,56 +172,26 @@ public class JoinAcitivity extends AppCompatActivity {
             public void onComplete(@NonNull Task<Uri> task) {
 
                 //데이터 베이스 업로드를 호출한다.
-                uploadMemberDB(mCaptureUri.getLastPathSegment(), mUserEmail);
+                DatabaseReference dbRef=mFirebaseDatabase.getReference();
+                MemberBean memberBean = new MemberBean();
+                memberBean.userEmail = mUserEmail;
+                memberBean.ImgIDuri = mCaptureUri.getLastPathSegment();
+                memberBean.name = mEdtName.getText().toString();
+                memberBean.Phonenum = mEdtPhone.getText().toString();
+                memberBean.isAdmin=false;
+
+                Log.e(TAG, "memberBean.userEmail" + memberBean.userEmail);
+
+                String userUUID = InsertFirebase.getUserIdFromUUID(memberBean.userEmail);
+                dbRef.child("members").child(userUUID).setValue(memberBean);
+                Toast.makeText(JoinAcitivity.this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
+                setResult(RESULT_OK);
+                finish();
             }
         });
-    } // end upload()
-
-    private void uploadMemberDB(String imgUri, String userEmail){
-
-        DatabaseReference dbRef=mFirebaseDatabase.getReference();
-        MemberBean memberBean = new MemberBean();
-        memberBean.userEmail = userEmail;
-        memberBean.ImgIDuri=imgUri;
-        memberBean.name = mEdtName.getText().toString();
-        memberBean.Phonenum = mEdtPhone.getText().toString();
-        memberBean.isAdmin=false;
-
-        Log.e(TAG, "memberBean.userEmail" + memberBean.userEmail);
-
-        String userUUID = InsertFirebase.getUserIdFromUUID(memberBean.userEmail);
-        dbRef.child("members").child(userUUID).setValue(memberBean);
-        Toast.makeText(this, "학생증, 사진, 이름 등록완료", Toast.LENGTH_LONG).show();
-        firebaseAuthWithGoogle(mTokenId);// 파이어베이스에 회원가입 및 로그인함
-
 
     } // end uploadMemberDB
 
-    // Firebase 회원가입하면서 로그인까지 되는 것
-    private void firebaseAuthWithGoogle(String idToken){
-        AuthCredential credential = GoogleAuthProvider.getCredential(idToken, null);
-        mFirebaseAuth.signInWithCredential(credential)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(task.isSuccessful()){
-                            // Firebase 로그인 성공
-                            Toast.makeText(getBaseContext(), "Firebase 로그인 성공", Toast.LENGTH_LONG).show();
-                            Log.d(TAG, " >> Firebase 로그인 성공");
-                            setResult(RESULT_OK);
-                            finish();
-
-                        }
-                        else{
-                            // 로그인 실패
-                            Toast.makeText(getBaseContext(), "Firebase 로그인 실패", Toast.LENGTH_LONG).show();
-                            Log.e(TAG, " >> 인증 실패"+task.getException());
-                            setResult(RESULT_CANCELED);
-                            finish();
-                        }
-                    }
-                });
-    } // end firebaseAuthWithGoogle
 
     private void takePicture() {
 
