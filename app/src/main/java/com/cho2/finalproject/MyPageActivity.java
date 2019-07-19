@@ -35,7 +35,7 @@ public class MyPageActivity extends AppCompatActivity {
                 MemberBean memberBean = dataSnapshot.getValue(MemberBean.class);
 
                 if(memberBean.reservationCompleteList != null) {
-                    MyPageAdapter myPageAdapter = new MyPageAdapter(MyPageActivity.this, memberBean.reservationCompleteList);
+                    MyPageAdapter myPageAdapter = new MyPageAdapter(MyPageActivity.this, memberBean.reservationCompleteList, memberBean);
                     mListMyPage.setAdapter(myPageAdapter);
                 }
             }
