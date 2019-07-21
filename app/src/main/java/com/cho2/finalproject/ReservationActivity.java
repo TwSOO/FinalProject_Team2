@@ -79,7 +79,7 @@ public class ReservationActivity extends AppCompatActivity {
         // 앞에서 선택된 사항 보여주기
         mTxtBuilding.setText(mReservationBean .step1BuildName);
         mTxtDate.setText(mReservationBean .step2Day);
-        mTxtRoom.setText(mReservationBean .step3RoomName + "호");
+        mTxtRoom.setText(mReservationBean .step3RoomName);
 
     }
 

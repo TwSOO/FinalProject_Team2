@@ -105,6 +105,18 @@
     <ListView
         android:id="@+id/listMyPage"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="400dp" />
+
+    <Button
+        android:id="@+id/btnHome"
+        android:layout_width="75dp"
+        android:layout_height="50dp"
+        android:layout_marginLeft="300dp"
+        android:background="#FFFFFF"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:text="Home"
+        android:textColor="#000000"
+        android:textSize="14dp" />
+
 
 </LinearLayout>

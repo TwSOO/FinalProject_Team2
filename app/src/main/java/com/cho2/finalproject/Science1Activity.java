@@ -28,8 +28,8 @@ public class Science1Activity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_science1);
 
-        reservationBean = (ReservationBean)getIntent().getSerializableExtra("reservation");
-        Log.e("reservationBean", "reservationBean 내용"+reservationBean.toString());
+        reservationBean = (ReservationBean) getIntent().getSerializableExtra("reservation");
+        Log.e("reservationBean", "reservationBean 내용" + reservationBean.toString());
 
         calendar = (CalendarView) findViewById(R.id.calendar);
         tvDate = (TextView) findViewById(R.id.tvDate);
@@ -46,7 +46,6 @@ public class Science1Activity extends AppCompatActivity {
 
             }
         });
-
 
         Button btnNext = findViewById(R.id.btnNext);
         btnNext.setOnClickListener(new View.OnClickListener() {

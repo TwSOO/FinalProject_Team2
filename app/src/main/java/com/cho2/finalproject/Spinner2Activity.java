@@ -18,7 +18,7 @@ import com.cho2.finalproject.bean.ReservationBean;
 import java.util.ArrayList;
 
 public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 - 2
-    private Spinner spinner1;
+    private Spinner spinner2;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     private TextView mTxtDate;
@@ -64,9 +64,9 @@ public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 -
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
 
-        spinner1 = (Spinner)findViewById(R.id.spinner1);
-        spinner1.setAdapter(arrayAdapter);
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner2 = (Spinner)findViewById(R.id.spinner2);
+        spinner2.setAdapter(arrayAdapter);
+        spinner2.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.", Toast.LENGTH_SHORT).show();

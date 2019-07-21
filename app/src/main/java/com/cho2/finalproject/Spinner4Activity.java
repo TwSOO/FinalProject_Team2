@@ -18,7 +18,7 @@ import com.cho2.finalproject.bean.ReservationBean;
 import java.util.ArrayList;
 
 public class Spinner4Activity extends AppCompatActivity { //2과 스피너
-    private Spinner spinner1;
+    private Spinner spinner4;
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     private ReservationBean reservationBean;
@@ -51,9 +51,9 @@ public class Spinner4Activity extends AppCompatActivity { //2과 스피너
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
 
-        spinner1 = (Spinner)findViewById(R.id.spinner1);
-        spinner1.setAdapter(arrayAdapter);
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+        spinner4 = (Spinner)findViewById(R.id.spinner4);
+        spinner4.setAdapter(arrayAdapter);
+        spinner4.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 Toast.makeText(getApplicationContext(),arrayList.get(i)+"가 선택되었습니다.",
@@ -84,7 +84,6 @@ public class Spinner4Activity extends AppCompatActivity { //2과 스피너
         if (reservationBean.step3RoomName==null){
             Toast.makeText(this, "강의실을 선택해주세요",Toast.LENGTH_LONG).show();
             return result;
-            //ㅎ
         }
         result=true;
         return result;
