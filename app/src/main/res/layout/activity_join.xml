@@ -5,7 +5,8 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:background="#FFD6DC">
 
     <TextView
         android:id="@+id/textView2"
@@ -17,7 +18,8 @@
         android:gravity="center"
         android:text="학생인증"
         android:textSize="40dp"
-        />
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000" />
 
     <ImageView
         android:id="@+id/imgID"
@@ -37,6 +39,8 @@
         android:layout_marginEnd="8dp"
         android:gravity="center"
         android:text="위 그림을 클릭하여 학생증을 사진을 업로드"
+        android:inputType="textPersonName"
+        android:fontFamily="@font/nanumsquareroundeb"
         />
 
 
@@ -50,6 +54,8 @@
         android:ems="10"
         android:hint="이름"
         android:inputType="textPersonName"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"
         />
 
     <EditText
@@ -62,14 +68,19 @@
         android:ems="10"
         android:hint="전화번호 입력"
         android:inputType="phone"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"
         />
 
     <Button
         android:id="@+id/btnSubmit"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
+        android:layout_marginTop="25dp"
         android:text="제출"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"
+        android:background="#FFFFFF"
         />
 
 </LinearLayout>

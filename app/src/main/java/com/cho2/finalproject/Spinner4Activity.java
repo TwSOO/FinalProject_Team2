@@ -38,13 +38,13 @@ public class Spinner4Activity extends AppCompatActivity { //2과 스피너
 
         arrayList = new ArrayList<>();
         arrayList.add("강의실을 선택하세요");
-        arrayList.add("301");
-        arrayList.add("302");
-        arrayList.add("303");
-        arrayList.add("304");
-        arrayList.add("305");
-        arrayList.add("306");
-        arrayList.add("308");
+        arrayList.add("301호");
+        arrayList.add("302호");
+        arrayList.add("303호");
+        arrayList.add("304호");
+        arrayList.add("305호");
+        arrayList.add("306호");
+        arrayList.add("308호");
 
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),

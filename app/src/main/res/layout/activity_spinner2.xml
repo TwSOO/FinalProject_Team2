@@ -6,38 +6,49 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".MainActivity"
-
-    >
+    android:padding="15dp"
+    android:background="#FFD6DC" >
 
     <TextView
+        android:id="@+id/humanTitle"
         android:layout_width="match_parent"
         android:layout_height="64dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="10dp"
+        android:text="50주년 기념관"
+        android:textSize="35dp"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"/>
 
-        android:text="50주년기념관"
-
-
-        android:textSize="40sp" />
     <TextView
         android:id="@+id/txtSelectDate"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="date"
-        android:textSize="20dp"
-        android:layout_marginBottom="20dp"/>
+        android:layout_marginBottom="30dp"
+        android:textSize="24dp"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"/>
+
 
     <Spinner
-        android:id="@+id/spinner1"
+        android:id="@+id/spinner2"
         android:layout_width="match_parent"
         android:layout_height="38dp"
         android:autofillHints="강의실을 선택하세요"
-        >
-    </Spinner>
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"
+        android:background="#FDE8E6"></Spinner>
 
     <Button
         android:id="@+id/btnOk"
-        android:layout_width="match_parent"
+        android:layout_width="100dp"
         android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="40dp"
         android:text="확인"
-        />
+        android:background="#FFFFFF"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000" />
 
 </LinearLayout>

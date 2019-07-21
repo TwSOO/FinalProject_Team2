@@ -4,16 +4,21 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:weightSum="1">
+    android:weightSum="1"
+    android:padding="20dp"
+    android:background="#FFD6DC">
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginTop="30dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginBottom="10dp"
         android:layout_weight="0.02"
         android:text=" 제1과학관"
-        android:textSize="25dp" />
+        android:textSize="30dp"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"/>
 
     <CalendarView
         android:id="@+id/calendar"
@@ -23,11 +28,10 @@
         android:focusedMonthDateColor="#000000"
         android:maxDate="12/31/2019"
         android:minDate="07/01/2019"
-        android:selectedWeekBackgroundColor="#DDB8DEF0"
         android:showWeekNumber="false"
         android:unfocusedMonthDateColor="#868686"
-        android:weekSeparatorLineColor="#E7E7E7" />
-
+        android:weekSeparatorLineColor="#E7E7E7"
+        android:background="#F5C1C7"/>
 
     <TextView
         android:id="@+id/tvDate"
@@ -35,8 +39,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="30dp"
-        android:text="0000년 00월 00일"
-        android:textSize="25dp" />
+        android:text=""
+        android:textSize="25dp"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000" />
 
     <Button
         android:id="@+id/btnNext"
@@ -44,7 +50,10 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="28dp"
-        android:text="다음" />
+        android:text="다음"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"
+        android:background="#FFFFFF"/>
 
 
 </LinearLayout>

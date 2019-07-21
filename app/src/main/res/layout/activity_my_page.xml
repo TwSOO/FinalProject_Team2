@@ -7,17 +7,23 @@
     android:orientation="vertical"
     tools:context=".MyPageActivity"
     android:weightSum="1"
-    android:layout_margin="10dp">
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp"
+    android:paddingBottom="20dp"
+    android:background="#E5D2D1">
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="20dp"
-        android:layout_marginEnd="20dp"
+        android:layout_marginEnd="15dp"
+        android:layout_marginTop="35dp"
         android:layout_marginBottom="10dp"
         android:text="마이페이지"
-        android:textSize="55dp"
+        android:textSize="40dp"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -31,22 +37,28 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginBottom="5dp"
-        android:text="예약내역확인"
-        android:textSize="20dp"/>
+        android:text="   예약내역확인"
+        android:textSize="22dp"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000"
+        android:textStyle="bold"/>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="45dp"
         android:weightSum="5"
-        android:orientation="horizontal">
+        android:orientation="horizontal"
+        android:background="#D8C0BF">
 
         <TextView
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="1"
+            android:fontFamily="@font/nanumsquareroundeb"
             android:gravity="center"
             android:text="예약일자"
-            android:textSize="22dp"/>
+            android:textColor="#000000"
+            android:textSize="16dp" />
 
         <TextView
             android:layout_width="0dp"
@@ -54,7 +66,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="예약건물"
-            android:textSize="22dp"/>
+            android:textSize="16dp"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="0dp"
@@ -62,9 +76,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="예약호수"
-            android:textSize="22dp"/>
-
-
+            android:textSize="16dp"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="0dp"
@@ -72,7 +86,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="예약시간"
-            android:textSize="22dp"/>
+            android:textSize="16dp"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:textColor="#000000"/>
 
         <TextView
             android:layout_width="0dp"
@@ -80,7 +96,9 @@
             android:layout_weight="1"
             android:gravity="center"
             android:text="예약취소"
-            android:textSize="22dp"/>
+            android:textSize="16dp"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:textColor="#000000"/>
 
     </LinearLayout>
 

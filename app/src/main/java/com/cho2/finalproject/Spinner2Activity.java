@@ -38,26 +38,26 @@ public class Spinner2Activity extends AppCompatActivity { //50주년 스피너 -
 
         arrayList = new ArrayList<>();
         arrayList.add("강의실을 선택하세요");
-        arrayList.add("402");
-        arrayList.add("403");
-        arrayList.add("404");
-        arrayList.add("405");
-        arrayList.add("406");
-        arrayList.add("407");
-        arrayList.add("408");
-        arrayList.add("409");
-        arrayList.add("411");
-        arrayList.add("412");
-        arrayList.add("413");
-        arrayList.add("414");
-        arrayList.add("420");
-        arrayList.add("421");
-        arrayList.add("422");
-        arrayList.add("423");
-        arrayList.add("514");
-        arrayList.add("515");
-        arrayList.add("520");
-        arrayList.add("522");
+        arrayList.add("402호");
+        arrayList.add("403호");
+        arrayList.add("404호");
+        arrayList.add("405호");
+        arrayList.add("406호");
+        arrayList.add("407호");
+        arrayList.add("408호");
+        arrayList.add("409호");
+        arrayList.add("411호");
+        arrayList.add("412호");
+        arrayList.add("413호");
+        arrayList.add("414호");
+        arrayList.add("420호");
+        arrayList.add("421호");
+        arrayList.add("422호");
+        arrayList.add("423호");
+        arrayList.add("514호");
+        arrayList.add("515호");
+        arrayList.add("520호");
+        arrayList.add("522호");
 
 
         arrayAdapter = new ArrayAdapter<>(getApplicationContext(),

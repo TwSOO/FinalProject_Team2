@@ -147,7 +147,7 @@ public class MyPageAdapter extends BaseAdapter {
                     }
                 });
 
-                Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,"취소 완료", Toast.LENGTH_LONG).show();
 
                 Intent intent = new Intent(mContext, MyPageActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);

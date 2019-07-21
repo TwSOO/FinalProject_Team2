@@ -40,15 +40,15 @@ public class Spinner3Activity extends AppCompatActivity { // 제1과 스피너
 
         arrayList = new ArrayList<>();
         arrayList.add("강의실을 선택하세요");
-        arrayList.add("B101");
-        arrayList.add("B102");
-        arrayList.add("B105");
-        arrayList.add("B108");
-        arrayList.add("B109");
-        arrayList.add("B111a");
-        arrayList.add("B113");
-        arrayList.add("B115");
-        arrayList.add("409");
+        arrayList.add("B101호");
+        arrayList.add("B102호");
+        arrayList.add("B105호");
+        arrayList.add("B108호");
+        arrayList.add("B109호");
+        arrayList.add("B111a호");
+        arrayList.add("B113호");
+        arrayList.add("B115호");
+        arrayList.add("409호");
 
 
 

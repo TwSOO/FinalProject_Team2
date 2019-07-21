@@ -5,13 +5,15 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".MyPageActivity">
+    tools:context=".MyPageActivity"
+    android:padding="10dp"
+    android:background="#E5D2D1">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-       android:gravity="center_horizontal" >
+        android:gravity="center_horizontal" >
         <TextView
             android:id="@+id/textView"
             android:layout_width="wrap_content"
@@ -22,13 +24,19 @@
             android:layout_marginTop="20dp"
             android:text="관리자 페이지"
             android:textSize="30dp"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:textColor="#000000"
             />
         <Button
             android:id="@+id/btnReserve"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="예약하기"
-            android:layout_marginLeft="150dp"/>
+            android:textSize="16dp"
+            android:layout_marginLeft="150dp"
+            android:background="#FFFFFF"
+            android:fontFamily="@font/nanumsquareroundeb"
+            android:textColor="#000000"/>
     </LinearLayout>
 
 
@@ -37,7 +45,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="[예약내역확인]"
-        android:textSize="20dp" />
+        android:textSize="20dp"
+        android:fontFamily="@font/nanumsquareroundeb"
+        android:textColor="#000000" />
 
 
     <LinearLayout
@@ -63,8 +73,19 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
-            android:weightSum="4"
-            android:orientation="horizontal">
+            android:weightSum="5"
+            android:orientation="horizontal"
+            android:background="#D8C0BF">
+
+            <TextView
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center"
+                android:text="예약일자"
+                android:textSize="15dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:textColor="#000000"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -72,7 +93,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="예약된건물"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:textColor="#000000"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -80,7 +103,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="예약호수"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:textColor="#000000"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -88,7 +113,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="예약시간"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:textColor="#000000"/>
 
             <TextView
                 android:layout_width="0dp"
@@ -96,7 +123,9 @@
                 android:layout_weight="1"
                 android:gravity="center"
                 android:text="예약취소"
-                android:textSize="15dp"/>
+                android:textSize="15dp"
+                android:fontFamily="@font/nanumsquareroundeb"
+                android:textColor="#000000"/>
 
         </LinearLayout>
 
