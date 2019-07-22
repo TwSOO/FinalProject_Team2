@@ -107,7 +107,7 @@ public class MainActivity extends AppCompatActivity {
                     if(memberBean.isAdmin){
                         intent = new Intent(getApplicationContext(), AdminActivity.class);
                     }else{
-                        intent = new Intent(getApplicationContext(), AdminActivity.class);
+                        intent = new Intent(getApplicationContext(), MyPageActivity.class);
                     }
                 }
 

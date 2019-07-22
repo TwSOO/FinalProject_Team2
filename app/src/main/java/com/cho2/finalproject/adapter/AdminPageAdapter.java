@@ -47,6 +47,7 @@ public class AdminPageAdapter extends BaseAdapter {
 
 
 
+
     public AdminPageAdapter(Context context, List<ReservationCompleteBean> reservationList) {
         mContext = context;
         mFirebaseDatabase = FirebaseDatabase.getInstance();
@@ -97,6 +98,7 @@ public class AdminPageAdapter extends BaseAdapter {
                 // 예약한 사용자의이메일
                 final String email = rcBean.mEmail;
 
+                // 예약한 사용자로 mMemberBean 대입함.
                 dbRef.child("members").addListenerForSingleValueEvent(new ValueEventListener() {
                     @Override
                     public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
@@ -138,8 +140,31 @@ public class AdminPageAdapter extends BaseAdapter {
 
                 // 로그인한 사용자에게서 예약데이터 삭제
                 final String uuid = InsertFirebase.getUserIdFromUUID( rcBean.mEmail ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
-                mMemberBean.reservationCompleteList.remove(timeIndex);
+                boolean isFind = false;
+//                mMemberBean.reservationCompleteList.remove(timeIndex);
+                for(int j=0; j<mMemberBean.reservationCompleteList.size(); j++){
+                    ReservationCompleteBean reservationCompleteBean = mMemberBean.reservationCompleteList.get(j);
+                    if(TextUtils.equals(rcBean.step1BuildName, reservationCompleteBean.step1BuildName)
+                    || TextUtils.equals(rcBean.step2Day, reservationCompleteBean.step2Day)
+                    || TextUtils.equals(rcBean.step3RoomName, reservationCompleteBean.step3RoomName)
+                            || TextUtils.equals(rcBean.step2Time, reservationCompleteBean.step2Time)
+                    ){
+                        mMemberBean.reservationCompleteList.remove(j);
+                        isFind=true;
+                        break;
+                    }
+                    else{
+                        break;
+                    }
+
+                } // for
+
+                if(!isFind){ return; }
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
+
+
+
+
 
                 // 데이터베이스의 reservations 폴더에서 예약 데이터 변경
                 dbRef.child("reservations").child(rcBean.step1BuildName).child(rcBean.step2Day).child(rcBean.step3RoomName).addListenerForSingleValueEvent (new ValueEventListener() {
