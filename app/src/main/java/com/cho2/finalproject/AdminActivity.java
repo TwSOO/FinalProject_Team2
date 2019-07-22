@@ -28,7 +28,7 @@ import java.util.List;
 public class AdminActivity extends AppCompatActivity {
 
 
-    private Spinner spinner1;
+
     ArrayList<String> arrayList;
     ArrayAdapter<String> arrayAdapter;
     private String mAdminEmail;
@@ -112,18 +112,7 @@ public class AdminActivity extends AppCompatActivity {
                 android.R.layout.simple_spinner_dropdown_item,
                 arrayList);
 
-        spinner1 = (Spinner)findViewById(R.id.spinner1);
-        spinner1.setAdapter(arrayAdapter);
-        spinner1.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
-            @Override
-            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(getApplicationContext(),arrayList.get(i)+"이 선택되었습니다.",
-                        Toast.LENGTH_SHORT).show();
-            }
-            @Override
-            public void onNothingSelected(AdapterView<?> adapterView) {
-            }
-        });
+
 
     } // onCreate
 }

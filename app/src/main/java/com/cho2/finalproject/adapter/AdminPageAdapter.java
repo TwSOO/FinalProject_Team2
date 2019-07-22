@@ -112,8 +112,8 @@ public class AdminPageAdapter extends BaseAdapter {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 // 로그인한 사용자에게서 예약데이터 삭제
-                final String uuid = InsertFirebase.getUserIdFromUUID( rcBean.mEmail ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
-
+//                final String uuid = InsertFirebase.getUserIdFromUUID( rcBean.mEmail ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
+                final String uuid = "7100000700770237589";
                 mMemberBean.reservationCompleteList.remove(position);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
 

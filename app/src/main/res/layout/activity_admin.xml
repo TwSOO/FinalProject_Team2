@@ -57,19 +57,6 @@
         android:orientation="vertical">
 
 
-
-        <TextView
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="예약자 날짜순으로 보기"
-            android:textSize="20dp" />
-
-        <Spinner
-            android:id="@+id/spinner1"
-            android:layout_width="match_parent"
-            android:layout_height="38dp"
-            android:autofillHints="7월"></Spinner>
-
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"

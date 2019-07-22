@@ -12,6 +12,7 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.cho2.finalproject.AdminActivity;
 import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
 import com.cho2.finalproject.bean.MemberBean;
@@ -137,7 +138,12 @@ public class TImeAdapter extends BaseAdapter {
 
                 Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(mContext, MyPageActivity.class);
+                Intent intent;
+                if(mMemberBean.isAdmin){
+                    intent = new Intent(mContext, AdminActivity.class);
+                }else{
+                    intent = new Intent(mContext, MyPageActivity.class);
+                }
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(intent);
             }
