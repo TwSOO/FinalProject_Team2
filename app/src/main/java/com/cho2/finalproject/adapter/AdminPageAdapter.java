@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 
+import com.cho2.finalproject.AdminActivity;
 import com.cho2.finalproject.MyPageActivity;
 import com.cho2.finalproject.R;
 import com.cho2.finalproject.bean.MemberBean;
@@ -137,7 +138,7 @@ public class AdminPageAdapter extends BaseAdapter {
 
                 // 로그인한 사용자에게서 예약데이터 삭제
                 final String uuid = InsertFirebase.getUserIdFromUUID( rcBean.mEmail ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
-                mMemberBean.reservationCompleteList.remove(position);
+                mMemberBean.reservationCompleteList.remove(timeIndex);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
 
                 // 데이터베이스의 reservations 폴더에서 예약 데이터 변경
@@ -162,9 +163,9 @@ public class AdminPageAdapter extends BaseAdapter {
                     }
                 });
 
-                Toast.makeText(mContext,"예약 완료", Toast.LENGTH_LONG).show();
+                Toast.makeText(mContext,"취소 완료", Toast.LENGTH_LONG).show();
 
-                Intent intent = new Intent(mContext, MyPageActivity.class);
+                Intent intent = new Intent(mContext, AdminActivity.class);
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                 mContext.startActivity(intent);
             }
