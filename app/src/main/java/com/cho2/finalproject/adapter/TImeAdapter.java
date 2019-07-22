@@ -132,6 +132,7 @@ public class TImeAdapter extends BaseAdapter {
                 rcBean.step2Time = timeBean.timeTitle;
                 rcBean.step3RoomName = mReservationBean.step3RoomName;
                 rcBean.timeIndex = position;
+                rcBean.mEmail = FirebaseAuth.getInstance().getCurrentUser().getEmail();
                 mMemberBean.reservationCompleteList.add( rcBean );
                 String uuid = InsertFirebase.getUserIdFromUUID(mMemberBean.userEmail);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);

@@ -4,6 +4,8 @@ import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.provider.Contacts;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -91,7 +93,29 @@ public class AdminPageAdapter extends BaseAdapter {
         btnCancel.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                cancel(rcBean, position);
+                // 예약한 사용자의이메일
+                final String email = rcBean.mEmail;
+
+                dbRef.child("members").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            mMemberBean = snapshot.getValue(MemberBean.class);
+                            if(TextUtils.equals(mMemberBean.userEmail, email)){
+                                    break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                if(mMemberBean != null){
+                    cancel(rcBean, position);
+                }
+
             }
 
         });
@@ -112,8 +136,7 @@ public class AdminPageAdapter extends BaseAdapter {
             public void onClick(DialogInterface dialogInterface, int i) {
 
                 // 로그인한 사용자에게서 예약데이터 삭제
-//                final String uuid = InsertFirebase.getUserIdFromUUID( rcBean.mEmail ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
-                final String uuid = "7100000700770237589";
+                final String uuid = InsertFirebase.getUserIdFromUUID( rcBean.mEmail ); // 관리자에서는 getCurrentUser() 대신 예약한 사람 uuid 받아와야함
                 mMemberBean.reservationCompleteList.remove(position);
                 dbRef.child("members").child(uuid).setValue(mMemberBean);
 
