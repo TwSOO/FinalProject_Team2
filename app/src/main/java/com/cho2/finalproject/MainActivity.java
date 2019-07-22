@@ -3,20 +3,28 @@ package com.cho2.finalproject;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.cho2.finalproject.bean.MemberBean;
 import com.cho2.finalproject.bean.ReservationBean;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 public class MainActivity extends AppCompatActivity {
 
     private ReservationBean reservationBean;
-
+    private MemberBean memberBean;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -76,8 +84,37 @@ public class MainActivity extends AppCompatActivity {
         btnMyPage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getApplicationContext(), MyPageActivity.class);
-                startActivity(intent);
+                final String email = FirebaseAuth.getInstance().getCurrentUser().getEmail();
+
+                FirebaseDatabase.getInstance().getReference().child("members").addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
+                        for(DataSnapshot snapshot : dataSnapshot.getChildren()) {
+                            memberBean = snapshot.getValue(MemberBean.class);
+                            if(TextUtils.equals(memberBean.userEmail, email)){
+                                break;
+                            }
+                        }
+                    }
+
+                    @Override
+                    public void onCancelled(@NonNull DatabaseError databaseError) {
+
+                    }
+                });
+                Intent intent = null;
+                if(memberBean != null){
+                    if(memberBean.isAdmin){
+                        intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    }else{
+                        intent = new Intent(getApplicationContext(), AdminActivity.class);
+                    }
+                }
+
+                if(intent != null){
+                    startActivity(intent);
+                }
+
             }
         });
 
